@@ -1,8 +1,8 @@
 ---
 title: About
 seo:
-  title: About Me
-  description: Learn more about the person behind the website and embark on a journey of inspiration and shared experiences.
+  title: About AI Projects
+  description: Welcome to my corner of the web! As an AI and big data student.
   image:
     src: '/about.jpeg'
     alt: A person sitting at a desk in front of a computer
@@ -10,11 +10,11 @@ seo:
 
 ![Alt text for image](/about.jpeg)
 
-**Note!:** This about page is entirely fictional and created for the purpose of showcasing [Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/).
+**Note!:**  Here, I proudly present a collection of my AI and big data projects. As an enthusiast in this field, I’ve crafted these projects with passion and purpose. Let’s explore how data, algorithms, and innovation converge to shape the future.  [Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/).
 
-## Ethan Donovan - Web Developer based in Estonia
+## Felix Marwuko - Web Developer and AI and bigdata student based in South Korea
 
-**Greetings!** I'm Ethan Donovan, a passionate web developer residing in the picturesque landscapes of [Estonia](https://en.wikipedia.org/wiki/Estonia). With a keen eye for design and a love for crafting seamless digital experiences, I bring a unique blend of creativity and technical expertise to the world of web development.
+**Greetings!** I'm Felix Marwuko, a passionate web developer and AI and Bigdata student residing in the picturesque landscapes of [South Korea](https://en.wikipedia.org/wiki/Estonia). As an AI and big data student, I’m passionate about creating impactful projects that harness the power of artificial intelligence. Let’s explore why I’m dedicated to building AI projects websites.
 
 ## Skills and Expertise
 
@@ -26,7 +26,7 @@ I thrive on solving complex problems and transforming ideas into functional, ele
 
 ## Global Perspective, Local Impact
 
-Living in Estonia has not only influenced my appreciation for nature and culture but has also shaped my approach to web development. I understand the importance of creating digital solutions that resonate with local audiences while maintaining a global perspective.
+Living in South Korea has not only influenced my appreciation for nature and culture but has also shaped my approach to web development. I understand the importance of creating digital solutions that resonate with local audiences while maintaining a global perspective.
 
 ## Continuous Learning
 
