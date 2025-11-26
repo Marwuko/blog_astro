@@ -16,31 +16,44 @@ const featuredProjects = projects.filter(({ data }) => data.isFeatured);
 ---
 
 <BaseLayout description={siteConfig.description} image={siteConfig.image}>
-    <Hero />
-    {
-        featuredProjects?.length > 0 && (
-            <div class="mb-16 sm:mb-24">
-                <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl">Projects</h2>
-                {featuredProjects.map((project) => (
-                    <ProjectPreview project={project} class="mb-10 sm:mb-12" headingLevel="h3" />
-                ))}
-                <div class="mt-12 sm:mt-16">
-                    <Button href="/projects">View All Projects</Button>
-                </div>
-            </div>
-        )
-    }
-    {
-        featuredPosts?.length > 0 && (
-            <div class="mb-16 sm:mb-24">
-                <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl">Writing</h2>
-                {featuredPosts.map((post) => (
-                    <PostPreview post={post} class="mb-10 sm:mb-12" headingLevel="h3" />
-                ))}
-                <div class="mt-12 sm:mt-16">
-                    <Button href="/blog">View All Posts</Button>
-                </div>
-            </div>
-        )
-    }
+  <Hero />
+
+  <!-- About teaser -->
+  <section class="mb-16 sm:mb-24">
+    <h2 class="mb-4 text-xl font-serif italic sm:text-2xl">About</h2>
+    <p class="max-w-2xl text-sm sm:text-base text-neutral-500 dark:text-neutral-400">
+      I’m Felix Marwuko, an IT and data professional based in South Korea. I recently
+      completed my <strong>B.S. in Information Technology (Data Science)</strong> at
+      <strong>UMass Global</strong> and support teaching and analytics as a
+      <strong>Teaching Assistant at Woosong University</strong>. I build practical systems
+      at the intersection of AI, databases, and automation.
+    </p>
+    <div class="mt-6">
+      <Button href="/about">More About Me</Button>
+    </div>
+  </section>
+
+  {featuredProjects?.length > 0 && (
+    <section class="mb-16 sm:mb-24">
+      <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl">Projects</h2>
+      {featuredProjects.map((project) => (
+        <ProjectPreview project={project} class="mb-10 sm:mb-12" headingLevel="h3" />
+      ))}
+      <div class="mt-12 sm:mt-16">
+        <Button href="/projects">View All Projects</Button>
+      </div>
+    </section>
+  )}
+
+  {featuredPosts?.length > 0 && (
+    <section class="mb-16 sm:mb-24">
+      <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl">Writing</h2>
+      {featuredPosts.map((post) => (
+        <PostPreview post={post} class="mb-10 sm:mb-12" headingLevel="h3" />
+      ))}
+      <div class="mt-12 sm:mt-16">
+        <Button href="/blog">View All Posts</Button>
+      </div>
+    </section>
+  )}
 </BaseLayout>

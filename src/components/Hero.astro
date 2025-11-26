@@ -1,29 +1,17 @@
----
-import { marked } from 'marked';
-import Button from './Button.astro';
-import siteConfig from '../data/site-config';
+  hero: {
+    title: 'Felix Marwuko – AI, Data & Systems Builder',
+    text: `
+I’m an IT and data professional based in South Korea. I recently completed my **B.S. in Information Technology (Data Science)** at **University of Massachusetts Global**, and I support teaching and analytics as a **Teaching Assistant at Woosong University**.
 
-const hero = siteConfig.hero;
----
-
-{
-    (hero?.title || hero?.image?.src || hero?.text || (hero?.actions && hero.actions.length > 0)) && (
-        <section class="w-full flex flex-col gap-8 mb-16 sm:mb-24">
-            {hero.title && <h1 class="text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">{hero.title}</h1>}
-            {hero.image?.src && (
-                <figure>
-                    <img class="w-full" src={hero.image.src} loading="lazy" decoding="async" alt={hero.image.alt || ''} />
-                    {hero.image.caption && <figcaption class="mt-1.5 text-xs sm:text-sm">{hero.image.caption}</figcaption>}
-                </figure>
-            )}
-            {hero.text && <div class="max-w-none prose prose-dante sm:prose-lg" set:html={marked.parse(hero.text)} />}
-            {hero.actions && hero.actions.length > 0 && (
-                <div class="flex flex-wrap gap-4">
-                    {hero.actions.map((action) => (
-                        <Button href={action.href}>{action.text}</Button>
-                    ))}
-                </div>
-            )}
-        </section>
-    )
-}
+I build practical systems at the intersection of **AI, databases, and automation**—from AI-powered assistants that connect to everyday tools to data-driven decision systems for real businesses.
+`,
+    actions: [
+      { text: 'View Projects', href: '/projects' },
+      { text: 'About Me', href: '/about' }
+    ],
+    image: {
+      src: '/Hero.png',
+      alt: 'AI and data systems hero illustration for Felix Marwuko portfolio',
+      caption: ''
+    }
+  },

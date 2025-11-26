@@ -2,13 +2,18 @@
 title: Get in touch
 seo:
   title: Contact
-  description: Get in touch through email or social media! Let me know how I can help.
+  description: Reach out for collaboration, project inquiries, or professional support.
 ---
 
-Thank you for reaching out! Whether you have a question, a suggestion, or just want to share your thoughts, I'm all ears. Feel free to get in touch through any of the methods below:
+Thank you for reaching out! Whether you're interested in collaborating, discussing a project, or looking for guidance in AI, data, or technology, I'm always open to connecting. Feel free to reach me through any of the methods below.
 
-_Email:_
-Feel free to drop me an email at [marwuko@naver.com](mailto:example@example.com), and I'll do my best to respond as soon as possible.
+**Email**  
+You can contact me directly at **fmarwuko@mail.umassglobal.edu**, and I’ll respond as soon as possible.
 
-_Social Media:_
-Connect with me on social media as well. Find me on [Twitter](https://twitter.com) or [LinkedIn](http://linkedin.com/in/felix-marwuko).
+**Social Media**  
+I’m active on major platforms. Connect with me on:
+
+- [LinkedIn](https://linkedin.com/in/felix-marwuko)
+- [Twitter](https://twitter.com/marwuko)
+
+Looking forward to hearing from you.
