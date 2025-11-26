@@ -1,17 +1,55 @@
-  hero: {
-    title: 'Felix Marwuko – AI, Data & Systems Builder',
-    text: `
-I’m an IT and data professional based in South Korea. I recently completed my **B.S. in Information Technology (Data Science)** at **University of Massachusetts Global**, and I support teaching and analytics as a **Teaching Assistant at Woosong University**.
+---
+import { marked } from 'marked';
+import Button from './Button.astro';
+import siteConfig from '../data/site-config';
 
-I build practical systems at the intersection of **AI, databases, and automation**—from AI-powered assistants that connect to everyday tools to data-driven decision systems for real businesses.
-`,
-    actions: [
-      { text: 'View Projects', href: '/projects' },
-      { text: 'About Me', href: '/about' }
-    ],
-    image: {
-      src: '/Hero.png',
-      alt: 'AI and data systems hero illustration for Felix Marwuko portfolio',
-      caption: ''
-    }
-  },
+const hero = siteConfig.hero;
+---
+
+{(hero?.title || hero?.image?.src || hero?.text || (hero?.actions && hero.actions.length > 0)) && (
+  <section class="w-full mb-16 sm:mb-24">
+    <div class="grid gap-10 items-center md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+      {/* LEFT: text */}
+      <div class="space-y-6">
+        {hero.title && (
+          <h1 class="text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">
+            {hero.title}
+          </h1>
+        )}
+
+        {hero.text && (
+          <div
+            class="max-w-xl prose prose-dante sm:prose-lg"
+            set:html={marked.parse(hero.text)}
+          />
+        )}
+
+        {hero.actions && hero.actions.length > 0 && (
+          <div class="flex flex-wrap gap-4">
+            {hero.actions.map((action) => (
+              <Button href={action.href}>{action.text}</Button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* RIGHT: image */}
+      {hero.image?.src && (
+        <figure class="overflow-hidden rounded-2xl border border-neutral-200/60 shadow-sm dark:border-neutral-800">
+          <img
+            class="w-full h-full object-cover"
+            src={hero.image.src}
+            loading="lazy"
+            decoding="async"
+            alt={hero.image.alt || ''}
+          />
+          {hero.image.caption && (
+            <figcaption class="px-4 py-2 text-xs sm:text-sm text-neutral-500 dark:text-neutral-400">
+              {hero.image.caption}
+            </figcaption>
+          )}
+        </figure>
+      )}
+    </div>
+  </section>
+)}
