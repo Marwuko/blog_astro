@@ -39,8 +39,11 @@ const currentTag = allTags.find((tag) => {
     image={{ src: '/dante-preview.jpg', alt: 'The preview of the site' }}
     showHeader={false}
 >
-    <h1 class="mb-12 text-2xl leading-tight font-serif italic sm:mb-16 sm:text-4xl">Posts Tagged "{currentTag?.name}"</h1>
-    {blog.map((post) => <PostPreview post={post} class="mb-10 sm:mb-12" />)}
+    <div class="mb-10 sm:mb-14">
+        <p class="text-[11px] uppercase tracking-[0.2em] font-medium text-accent mb-3">Tag</p>
+        <h1 class="text-3xl font-serif font-medium tracking-tight sm:text-4xl">"{currentTag?.name}"</h1>
+    </div>
+    {blog.map((post) => <PostPreview post={post} />)}
     <Pagination page={page} class="my-16 sm:my-24" />
     <Subscribe class="my-16 sm:my-24" />
 </BaseLayout>

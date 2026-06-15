@@ -31,16 +31,16 @@ const { Content } = await post.render();
 
 <BaseLayout title={seo?.title ?? title} description={seo?.description ?? excerpt} image={seo?.image} pageType="article" showHeader={false}>
     <article class="mb-16 sm:mb-24">
-        <header class="mb-8">
-            <h1 class="text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">{title}</h1>
-            <div class="mt-4 text-sm">
+        <header class="mb-10">
+            <h1 class="text-4xl leading-[1.1] font-serif font-medium tracking-tight sm:text-5xl sm:leading-[1.05]">{title}</h1>
+            <div class="mt-4 text-[11px] uppercase tracking-wide font-medium text-main/45">
                 <FormattedDate date={publishDate} />
                 {
                     updatedDate && (
                         <>
                             {' '}
                             <span>
-                                (Updated on <FormattedDate date={updatedDate} />)
+                                · Updated <FormattedDate date={updatedDate} />
                             </span>
                         </>
                     )
@@ -68,9 +68,9 @@ const { Content } = await post.render();
     {
         (prevPost || nextPost) && (
             <div class="my-16 sm:my-24">
-                <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl">Read Next</h2>
-                {nextPost && <PostPreview post={nextPost} class="mb-10 sm:mb-12" headingLevel="h3" />}
-                {prevPost && <PostPreview post={prevPost} class="mb-10 sm:mb-12" headingLevel="h3" />}
+                <h2 class="mb-8 text-xl font-serif font-medium tracking-tight sm:mb-10 sm:text-2xl">Read Next</h2>
+                {nextPost && <PostPreview post={nextPost} headingLevel="h3" />}
+                {prevPost && <PostPreview post={prevPost} headingLevel="h3" />}
             </div>
         )
     }

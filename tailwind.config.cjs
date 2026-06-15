@@ -1,23 +1,26 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
-
 module.exports = {
     content: ['./src/**/*.{astro,html,js,jsx,md,mdx,ts,tsx}'],
     darkMode: 'class',
     theme: {
         fontFamily: {
-            sans: ['Inter', ...defaultTheme.fontFamily.sans],
-            serif: ['Newsreader', ...defaultTheme.fontFamily.serif]
+            sans: ['"Plus Jakarta Sans"', ...defaultTheme.fontFamily.sans],
+            serif: ['"Cormorant Garamond"', ...defaultTheme.fontFamily.serif]
         },
         extend: {
             textColor: {
-                main: 'rgb(var(--color-text-main) / <alpha-value>)'
+                main: 'rgb(var(--color-text-main) / <alpha-value>)',
+                accent: 'rgb(var(--color-accent) / <alpha-value>)'
             },
             backgroundColor: {
                 main: 'rgb(var(--color-bg-main) / <alpha-value>)',
-                muted: 'rgb(var(--color-bg-muted) / <alpha-value>)'
+                muted: 'rgb(var(--color-bg-muted) / <alpha-value>)',
+                surface: 'rgb(var(--color-bg-surface) / <alpha-value>)',
+                accent: 'rgb(var(--color-accent) / <alpha-value>)'
             },
             borderColor: {
-                main: 'rgb(var(--color-border-main) / <alpha-value>)'
+                main: 'rgb(var(--color-border-main) / <alpha-value>)',
+                accent: 'rgb(var(--color-accent) / <alpha-value>)'
             },
             typography: (theme) => ({
                 dante: {
@@ -35,7 +38,7 @@ module.exports = {
                         '--tw-prose-captions': theme('textColor.main / 100%'),
                         '--tw-prose-code': theme('textColor.main / 100%'),
                         '--tw-prose-pre-code': theme('colors.zinc.100'),
-                        '--tw-prose-pre-bg': theme('colors.zinc.800'),
+                        '--tw-prose-pre-bg': theme('colors.zinc.900'),
                         '--tw-prose-th-borders': theme('borderColor.main / 100%'),
                         '--tw-prose-td-borders': theme('borderColor.main / 100%')
                     }
@@ -43,41 +46,38 @@ module.exports = {
                 DEFAULT: {
                     css: {
                         a: {
-                            fontWeight: 'normal',
+                            fontWeight: '500',
                             textDecoration: 'underline',
-                            textDecorationStyle: 'dashed',
+                            textDecorationStyle: 'dotted',
                             textDecorationThickness: '1px',
-                            textUnderlineOffset: '2px',
+                            textUnderlineOffset: '3px',
                             '&:hover': {
+                                color: 'rgb(var(--color-accent))',
                                 textDecorationStyle: 'solid'
                             }
                         },
                         'h1,h2,h3,h4,h5,h6': {
                             fontFamily: theme('fontFamily.serif'),
-                            fontWeight: 500
+                            fontWeight: 500,
+                            letterSpacing: '-0.02em'
                         },
                         blockquote: {
                             border: 0,
+                            borderLeft: '2px solid rgb(var(--color-accent))',
                             fontFamily: theme('fontFamily.serif'),
                             fontSize: '1.3125em',
                             fontStyle: 'italic',
                             fontWeight: 'normal',
                             lineHeight: 1.4,
-                            paddingLeft: 0,
+                            paddingLeft: '1.5rem',
                             '@media (min-width: theme("screens.sm"))': {
-                                fontSize: '1.66667em',
+                                fontSize: '1.5em',
                                 lineHeight: 1.3
                             }
                         }
                     }
                 },
-                lg: {
-                    css: {
-                        blockquote: {
-                            paddingLeft: 0
-                        }
-                    }
-                }
+                lg: { css: { blockquote: { paddingLeft: '1.5rem' } } }
             })
         }
     },

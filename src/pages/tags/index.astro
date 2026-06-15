@@ -18,22 +18,28 @@ const tags = getAllTags(posts).sort((tagA, tagB) => {
     description="Explore tag directory for easy navigation and discovery. Find a wide range of topics, articles, and insights organized by tags, making it effortless to locate the content that interests you most."
     showHeader={false}
 >
-    <h1 class="mb-12 text-2xl font-serif italic sm:mb-16 sm:text-4xl">All Tags</h1>
+    <div class="mb-10 sm:mb-14">
+        <p class="text-[11px] uppercase tracking-[0.2em] font-medium text-accent mb-3">Browse</p>
+        <h1 class="text-3xl font-serif font-medium tracking-tight sm:text-4xl">All Tags</h1>
+    </div>
     {
         tags.map((tag) => {
             const postCount = getPostsByTag(posts, tag.slug).length;
             return (
-                <a class="mb-10 flex justify-between items-start gap-8 group sm:mb-12" href={`/tags/${tag.slug}`}>
+                <a
+                    class="flex justify-between items-start gap-8 group py-6 border-b border-main/15 first:border-t first:border-t-main/15"
+                    href={`/tags/${tag.slug}`}
+                >
                     <div class="grow">
-                        <h2 class="text-xl leading-tight font-serif font-medium group-hover:underline group-hover:decoration-dashed group-hover:underline-offset-4 group-hover:decoration-1 sm:text-2xl">
+                        <h2 class="text-xl leading-tight font-serif font-medium tracking-tight transition-colors duration-200 group-hover:text-accent sm:text-2xl">
                             {tag.name}
                         </h2>
-                        <div class="mt-1 text-sm leading-normal">
+                        <div class="mt-1 text-sm text-main/50">
                             {postCount} {postCount === 1 ? 'post' : 'posts'}
                         </div>
                     </div>
-                    <div class="hidden font-serif italic opacity-0 transition group-hover:opacity-100 sm:inline-flex sm:gap-1 sm:items-center sm:shrink-0">
-                        View Tag Archive <ArrowRight class="fill-current w-4 h-4" />
+                    <div class="hidden sm:inline-flex sm:gap-1.5 sm:items-center sm:shrink-0 text-accent font-serif italic opacity-0 translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0">
+                        View <ArrowRight class="fill-current w-4 h-4" />
                     </div>
                 </a>
             );

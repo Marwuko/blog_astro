@@ -4,35 +4,26 @@ import ArrowRight from '../icons/ArrowRight.astro';
 import FormattedDate from './FormattedDate.astro';
 
 type Props = { post: CollectionEntry<'blog'>; class?: string; headingLevel?: 'h2' | 'h3' };
-
 const { post, class: className, headingLevel = 'h2' } = Astro.props;
 const { title, publishDate, updatedDate, excerpt } = post.data;
 const TitleTag = headingLevel;
 ---
 
-<a class:list={['flex justify-between items-start gap-8 group', className]} href={`/blog/${post.slug}/`}>
-    <div class="grow">
-        <TitleTag
-            class="text-xl leading-tight font-serif font-medium group-hover:underline group-hover:decoration-dashed group-hover:underline-offset-4 group-hover:decoration-1 sm:text-2xl"
-        >
+<a
+    class:list={['group flex items-start justify-between gap-6 py-5 border-b border-main/8 transition-all duration-200', className]}
+    href={`/blog/${post.slug}/`}
+>
+    <div class="grow min-w-0">
+        <TitleTag class="text-base sm:text-lg font-serif font-medium tracking-tight leading-snug group-hover:text-accent transition-colors duration-200">
             {title}
         </TitleTag>
-        <div class="mt-1 text-sm leading-normal">
+        <div class="mt-1.5 text-[10px] uppercase tracking-widest font-semibold text-main/35">
             <FormattedDate date={publishDate} />
-            {
-                updatedDate && (
-                    <>
-                        {' '}
-                        <span>
-                            (Updated on <FormattedDate date={updatedDate} />)
-                        </span>
-                    </>
-                )
-            }
+            {updatedDate && <span> · Updated <FormattedDate date={updatedDate} /></span>}
         </div>
-        {excerpt && <div class="mt-3 text-sm leading-normal">{excerpt}</div>}
+        {excerpt && <p class="mt-1.5 text-xs leading-relaxed text-main/45 line-clamp-1 hidden sm:block">{excerpt}</p>}
     </div>
-    <div class="hidden font-serif italic opacity-0 transition group-hover:opacity-100 sm:inline-flex sm:gap-1 sm:items-center sm:shrink-0">
-        Read Post <ArrowRight class="fill-current w-4 h-4" />
+    <div class="shrink-0 mt-0.5 w-7 h-7 rounded-full border border-main/15 flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:border-accent/50 transition-all duration-200">
+        <ArrowRight class="fill-current w-3 h-3 text-accent" />
     </div>
 </a>

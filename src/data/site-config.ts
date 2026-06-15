@@ -1,6 +1,6 @@
 const siteConfig: SiteConfig = {
     title: 'Felix Marwuko – AI, Data & Systems',
-    subtitle: 'AI, data science, and practical automation',
+    subtitle: 'AI · Data · Systems',
     description: 'Portfolio and blog of Felix Marwuko, focusing on AI, data systems, and automation projects.',
     image: {
         src: '/Hero.png',
@@ -15,11 +15,7 @@ const siteConfig: SiteConfig = {
     footerNavLinks: [
         { text: 'About', href: '/about' },
         { text: 'Contact', href: '/contact' },
-        { text: 'Terms', href: '/terms' },
-        {
-            text: 'Download theme',
-            href: 'https://github.com/JustGoodUI/dante-astro-theme'
-        }
+        { text: 'Terms', href: '/terms' }
     ],
     socialLinks: [
         {

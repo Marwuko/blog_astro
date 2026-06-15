@@ -1,53 +1,61 @@
 ---
 import siteConfig from '../data/site-config';
 
-// Footer navigation links
 const navLinks = [
-  { text: "About", href: "/about" },
-  { text: "Contact", href: "/contact" },
-  { text: "Terms", href: "/terms" },
+    { text: 'About', href: '/about' },
+    { text: 'Contact', href: '/contact' },
+    { text: 'Terms', href: '/terms' }
 ];
 
-// Social links (from your site-config)
 const socialLinks = siteConfig.socialLinks || [];
 ---
 
-<footer class="w-full max-w-3xl mx-auto pt-12 pb-10 sm:pt-24 sm:pb-14">
+<footer class="w-full max-w-4xl mx-auto px-4 md:px-8 mt-12 pt-12 pb-10 sm:pt-16 sm:pb-14 border-t border-main/10">
+    <div class="grid gap-8 sm:grid-cols-[1fr_auto]">
+        <!-- Brand identity -->
+        <div>
+            <a
+                href="/"
+                class="font-serif text-xl font-medium tracking-tight transition-colors duration-200 hover:text-accent"
+            >
+                Felix Marwuko
+            </a>
+            {siteConfig.subtitle && (
+                <p class="mt-1.5 text-sm text-main/50">
+                    {siteConfig.subtitle}
+                </p>
+            )}
+        </div>
 
-  <!-- Top Navigation Links -->
-  <div class="mb-4 flex flex-wrap gap-x-6 gap-y-1">
-    {navLinks.map((link) => (
-      <a class="font-serif hover:underline hover:underline-offset-2" href={link.href}>
-        {link.text}
-      </a>
-    ))}
-  </div>
-
-  <!-- Bottom section: Social links + Copyright -->
-  <div 
-    class="pt-6 flex flex-col gap-4 border-t border-dashed border-main 
-           sm:flex-row-reverse sm:justify-between sm:items-center"
-  >
-
-    <!-- Social Links -->
-    <div class="flex flex-wrap gap-x-4 gap-y-1">
-      {socialLinks.map((link) => (
-        <a 
-          class="inline-flex items-center justify-center text-sm hover:underline hover:underline-offset-2"
-          href={link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {link.text}
-        </a>
-      ))}
+        <!-- Nav links -->
+        <div class="flex flex-wrap gap-x-6 gap-y-1 items-start">
+            {navLinks.map((link) => (
+                <a
+                    class="text-sm font-medium transition-colors duration-200 hover:text-accent"
+                    href={link.href}
+                >
+                    {link.text}
+                </a>
+            ))}
+        </div>
     </div>
 
-    <!-- Copyright -->
-    <p class="text-sm">
-      &copy; {new Date().getFullYear()} Felix Marwuko — AI, Data & Systems. All rights reserved.
-    </p>
-
-  </div>
-
+    <!-- Bottom bar -->
+    <div class="mt-10 pt-6 border-t border-main/10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div class="flex flex-wrap gap-x-5 gap-y-1">
+            {socialLinks.map((link) => (
+                <a
+                    class="text-sm text-main/55 transition-colors duration-200 hover:text-accent"
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    {link.text}
+                </a>
+            ))}
+        </div>
+        <p class="text-sm text-main/35">
+            &copy; {new Date().getFullYear()} Felix Marwuko
+        </p>
+    </div>
 </footer>
