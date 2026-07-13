@@ -86,27 +86,31 @@ const liveProducts = [
                 </div>
             </div>
 
-            <!-- RIGHT: the untouched portrait, framed in an arch window -->
+            <!-- RIGHT: cutout portrait rising out of an accent arch -->
             {hero.image?.src && (
                 <figure class="relative mt-8 lg:mt-0 w-full max-w-sm mx-auto lg:mx-0 lg:justify-self-end" data-reveal style="--reveal-delay: 150ms">
                     <!-- Decorative marks -->
                     <div
-                        class="absolute -top-7 -right-4 w-24 h-24 border-2 border-dashed border-accent/30 rounded-full animate-[spin_45s_linear_infinite] motion-reduce:animate-none"
+                        class="absolute -top-7 right-1 w-24 h-24 border-2 border-dashed border-accent/30 rounded-full animate-[spin_45s_linear_infinite] motion-reduce:animate-none"
                         aria-hidden="true"
                     ></div>
                     <span class="absolute top-12 -left-5 font-mono text-lg text-accent/60" aria-hidden="true">+</span>
                     <span class="absolute top-1/2 -right-6 font-mono text-sm text-accent/40" aria-hidden="true">+</span>
 
-                    <!-- Outer offset arch line -->
-                    <div class="absolute -inset-2.5 rounded-t-full rounded-b-[1.6rem] border border-accent/25" aria-hidden="true"></div>
+                    <div class="relative overflow-hidden rounded-b-3xl pt-9">
+                        <!-- Arch with soft accent fill -->
+                        <div
+                            class="absolute inset-x-1 bottom-0 top-[24%] rounded-t-full bg-gradient-to-b from-accent/25 via-accent/10 to-transparent border border-accent/25"
+                            aria-hidden="true"
+                        ></div>
+                        <!-- Inner concentric arc -->
+                        <div class="absolute inset-x-9 bottom-0 top-[32%] rounded-t-full border border-accent/20" aria-hidden="true"></div>
 
-                    <!-- Arch window holding the original photograph -->
-                    <div class="relative overflow-hidden rounded-t-full rounded-b-2xl border-2 border-accent/40 shadow-2xl shadow-black/30 dark:shadow-black/60">
                         <img
-                            class="w-full aspect-[5/6] object-cover object-top"
-                            src={hero.image.src}
-                            width="900"
-                            height="1080"
+                            class="relative w-full drop-shadow-[0_20px_35px_rgb(var(--color-accent)/0.25)]"
+                            src="/felix-cutout.webp"
+                            width="974"
+                            height="1152"
                             loading="eager"
                             decoding="async"
                             alt={hero.image.alt || ''}
