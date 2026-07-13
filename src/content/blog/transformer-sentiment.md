@@ -9,7 +9,7 @@ tags:
   - AWS
 ---
 
-NLP feels different from computer vision — the challenge is not just the data,  
+NLP feels different from computer vision. The challenge is not just the data,  
 but the ambiguity of language.
 
 This project explored how transformer models classify sentiment in movie reviews.

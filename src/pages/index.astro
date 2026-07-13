@@ -4,7 +4,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
 import Hero from '../components/Hero.astro';
 import PostPreview from '../components/PostPreview.astro';
-import ProjectPreview from '../components/ProjectPreview.astro';
 import siteConfig from '../data/site-config';
 import { sortItemsByDateDesc } from '../utils/data-utils';
 
@@ -13,75 +12,466 @@ const featuredPosts = posts.filter(({ data }) => data.isFeatured);
 const projects = (await getCollection('projects')).sort(sortItemsByDateDesc);
 const featuredProjects = projects.filter(({ data }) => data.isFeatured);
 
+const credentials = ['UMass Global', 'Woosong University', 'AWS x Udacity', 'CompTIA', 'The Korea Times'];
+
+const services = [
+    {
+        title: 'AI Systems & Assistants',
+        blurb: 'Assistants that plug into the tools you already use: spreadsheets, documents, dashboards, and databases. Built to do real work, not demos.',
+        items: ['RAG pipelines over your documents', 'LLM integrations into daily workflows', 'Task automation with a natural-language front door']
+    },
+    {
+        title: 'Data & Business Intelligence',
+        blurb: 'From raw exports to dashboards that decision-makers actually open. I start with the questions, then build the model behind them.',
+        items: ['SQL data modeling and cleanup', 'Power BI and Tableau dashboards', 'Automated reporting pipelines']
+    },
+    {
+        title: 'Databases & Automation',
+        blurb: 'Schemas that stay clean in year three, not just at demo day. Systems documented well enough that you do not need me forever.',
+        items: ['MySQL and SQL Server design', 'ER diagrams and migrations', 'API integration and scripting']
+    }
+];
+
+const stats = [
+    { value: projects.length, label: 'Projects shipped' },
+    { value: posts.length, label: 'Posts written' },
+    { value: 6, label: 'Skill areas' },
+    { value: 2, label: 'Continents lived on' }
+];
+
+const ticker = [
+    'Python', 'SQL', 'PyTorch', 'HuggingFace', 'AWS', 'Power BI', 'Tableau', 'MySQL',
+    'TypeScript', 'Astro', 'React', 'Node.js', 'Tailwind CSS', 'pandas', 'R', 'Google Cloud'
+];
+
 const skills = [
-    { area: 'AI & Machine Learning', stack: 'Python · PyTorch · HuggingFace · RAG · LLMs · Transformers' },
-    { area: 'Data & Analytics', stack: 'SQL · Power BI · Tableau · pandas · Excel · R' },
-    { area: 'Cloud Platforms', stack: 'AWS · Google Cloud · Automated Pipelines' },
-    { area: 'Databases', stack: 'MySQL · SQL Server · Schema Design · ER Diagrams' },
-    { area: 'Web Development', stack: 'TypeScript · Astro · React · Node.js · Tailwind CSS' },
-    { area: 'Systems & Automation', stack: 'Data Pipelines · API Integration · Workflow Automation' },
+    {
+        area: 'AI & Machine Learning',
+        stack: ['Python', 'PyTorch', 'HuggingFace', 'RAG', 'LLMs', 'Transformers'],
+        note: 'I care about models that ship, not models that stay in notebooks.'
+    },
+    {
+        area: 'Data & Analytics',
+        stack: ['SQL', 'Power BI', 'Tableau', 'pandas', 'Excel', 'R'],
+        note: 'SQL first, always. The dashboards come after the questions are clear.'
+    },
+    {
+        area: 'Cloud Platforms',
+        stack: ['AWS', 'Google Cloud', 'Automated Pipelines'],
+        note: 'Trained on AWS through the AI Scientist program. I keep things simple and cheap.'
+    },
+    {
+        area: 'Databases',
+        stack: ['MySQL', 'SQL Server', 'Schema Design', 'ER Diagrams'],
+        note: 'A good schema saves months. I have learned this the hard way, twice.'
+    },
+    {
+        area: 'Web Development',
+        stack: ['TypeScript', 'Astro', 'React', 'Node.js', 'Tailwind CSS'],
+        note: 'This site is hand-built with Astro. No page builders were harmed.'
+    },
+    {
+        area: 'Systems & Automation',
+        stack: ['Data Pipelines', 'API Integration', 'Workflow Automation'],
+        note: 'If a task happens three times a week, I will probably script it.'
+    }
+];
+
+// Hand-written terminal demos for the case study visuals, keyed by project slug
+const terminals: Record<string, { title: string; lines: { text: string; kind: 'cmd' | 'ok' | 'out' }[] }> = {
+    'flexai-pos': {
+        title: 'flexai-pos',
+        lines: [
+            { text: 'sale add --items 3 --pay mobile', kind: 'cmd' },
+            { text: 'receipt #10482 issued', kind: 'ok' },
+            { text: 'stock updated: 3 items deducted', kind: 'ok' },
+            { text: 'ai "what should I reorder this week?"', kind: 'cmd' },
+            { text: 'low stock flagged: 2 products need reordering', kind: 'out' }
+        ]
+    },
+    'technabi': {
+        title: 'technabi.com',
+        lines: [
+            { text: 'git push origin main', kind: 'cmd' },
+            { text: 'build passed, site deployed', kind: 'ok' },
+            { text: 'status technabi.com', kind: 'cmd' },
+            { text: 'ssl valid, sitemap indexed', kind: 'ok' },
+            { text: 'live and serving visitors', kind: 'out' }
+        ]
+    },
+    'ghana-ai-law-assistant': {
+        title: 'ghana-law-assistant',
+        lines: [
+            { text: 'python ingest.py --source ghana_laws/', kind: 'cmd' },
+            { text: '1,247 sections chunked and embedded', kind: 'ok' },
+            { text: 'ask "Can a tenant be evicted without notice?"', kind: 'cmd' },
+            { text: 'searching Rent Act 1963 (Act 220)...', kind: 'out' },
+            { text: 'answer drafted with 3 cited sections', kind: 'ok' }
+        ]
+    },
+    'ava-ai-workflows': {
+        title: 'ava',
+        lines: [
+            { text: 'ava "update the Q3 sheet and refresh the deck"', kind: 'cmd' },
+            { text: 'excel: 42 rows updated', kind: 'ok' },
+            { text: 'powerpoint: 6 slides refreshed', kind: 'ok' },
+            { text: 'dashboard: data source reloaded', kind: 'ok' },
+            { text: 'done in 14s. 3 tools, zero clicks.', kind: 'out' }
+        ]
+    },
+    'autodutychecker': {
+        title: 'autodutychecker',
+        lines: [
+            { text: 'estimate --car "2018 Toyota Corolla" --port Tema', kind: 'cmd' },
+            { text: 'CIF value resolved from listings', kind: 'ok' },
+            { text: 'duty + levies computed per GRA schedule', kind: 'ok' },
+            { text: 'total landed cost: ready in seconds', kind: 'out' }
+        ]
+    },
+    'investwise-portfolio': {
+        title: 'investwise-db',
+        lines: [
+            { text: 'CALL rebalance_check(client_id => 1042);', kind: 'cmd' },
+            { text: '3 holdings outside target allocation', kind: 'out' },
+            { text: 'compliance rules: all constraints pass', kind: 'ok' },
+            { text: 'report generated for advisor review', kind: 'ok' }
+        ]
+    }
+};
+
+const process = [
+    { step: '01', title: 'Understand', text: 'We talk through the problem and I look at the real data. We agree on what success actually means before anything gets built.' },
+    { step: '02', title: 'Design', text: 'Schema, architecture, and a rough sketch first. Changes are cheap on paper and expensive in production.' },
+    { step: '03', title: 'Build', text: 'Short iterations with working software early. You see honest progress, not status reports.' },
+    { step: '04', title: 'Ship & Support', text: 'Deployed, documented, and handed over properly. I stay reachable after launch.' }
 ];
 ---
 
 <BaseLayout title={siteConfig.title} description={siteConfig.description} image={siteConfig.image} showHeader={false}>
     <Hero />
 
-    <!-- About teaser -->
-    <section class="mb-20 sm:mb-28">
-        <p class="text-[11px] uppercase tracking-[0.2em] font-semibold text-accent mb-3">About</p>
-        <p class="max-w-2xl text-base sm:text-lg text-main/65 leading-relaxed">
-            I'm <strong class="text-main font-semibold">Felix Marwuko</strong>, an IT and data professional based in South Korea.
-            I hold a <strong class="text-main font-semibold">B.S. in Information Technology (Data Science)</strong> from
-            <strong class="text-main font-semibold">UMass Global</strong> and serve as a
-            <strong class="text-main font-semibold">Teaching Assistant at Woosong University</strong>.
-            I build at the intersection of <strong class="text-main font-semibold">AI, databases, and automation</strong>.
-        </p>
-        <div class="mt-7">
-            <Button href="/about">More About Me</Button>
+    <!-- Credentials strip -->
+    <section class="mb-20 sm:mb-28" data-reveal aria-label="Education and certifications">
+        <p class="text-center text-[10px] font-mono uppercase tracking-[0.2em] text-main/40 mb-5">Educated, trained, and published by way of</p>
+        <div class="flex flex-wrap justify-center gap-x-10 gap-y-3">
+            {credentials.map((name) => (
+                <span class="font-display text-sm sm:text-base font-semibold tracking-tight text-main/50">{name}</span>
+            ))}
         </div>
     </section>
 
-    <!-- Skills grid -->
+    <!-- Services -->
     <section class="mb-20 sm:mb-28">
-        <p class="text-[11px] uppercase tracking-[0.2em] font-semibold text-accent mb-3">Expertise</p>
-        <h2 class="text-2xl font-serif font-medium tracking-tight mb-8 sm:text-3xl">Skills & Stack</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {skills.map((skill) => (
-                <div class="p-5 rounded-xl border border-main/10 bg-surface">
-                    <h3 class="text-sm font-semibold text-accent mb-2">{skill.area}</h3>
-                    <p class="text-xs text-main/50 leading-relaxed">{skill.stack}</p>
+        <div data-reveal>
+            <p class="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-accent mb-3">01 / Services</p>
+            <h2 class="text-2xl font-display font-semibold tracking-tight mb-3 sm:text-3xl">What I do for teams</h2>
+            <p class="max-w-xl text-sm sm:text-base text-main/60 leading-relaxed mb-8">
+                Three things, done properly. If your problem does not fit one of these boxes, ask anyway: the interesting work usually sits between them.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {services.map((service, i) => (
+                <div class="spot-card rounded-xl p-6 flex flex-col" data-reveal style={`--reveal-delay: ${i * 80}ms`}>
+                    <span class="font-mono text-[10px] tracking-[0.16em] text-accent/70 mb-4">{String(i + 1).padStart(2, '0')}</span>
+                    <h3 class="text-lg font-display font-semibold tracking-tight mb-2.5">{service.title}</h3>
+                    <p class="text-sm text-main/55 leading-relaxed mb-5">{service.blurb}</p>
+                    <ul class="mt-auto space-y-2">
+                        {service.items.map((item) => (
+                            <li class="flex gap-2.5 text-xs text-main/65 leading-relaxed">
+                                <span class="text-accent mt-px" aria-hidden="true">+</span>
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             ))}
         </div>
     </section>
 
+    <!-- Stats -->
+    <section class="mb-20 sm:mb-28" data-reveal>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {stats.map((stat) => (
+                <div class="spot-card rounded-xl p-6 text-center">
+                    <p class="font-display text-3xl sm:text-4xl font-semibold text-accent">
+                        <span class="stat-counter tabular-nums" data-count={stat.value}>0</span>
+                    </p>
+                    <p class="mt-1.5 text-[10px] font-mono uppercase tracking-[0.16em] text-main/50">{stat.label}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <!-- Case studies -->
     {featuredProjects?.length > 0 && (
         <section class="mb-20 sm:mb-28">
-            <p class="text-[11px] uppercase tracking-[0.2em] font-semibold text-accent mb-3">Selected Work</p>
-            <h2 class="text-2xl font-serif font-medium tracking-tight mb-8 sm:text-3xl">Featured Projects</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {featuredProjects.map((project) => (
-                    <ProjectPreview project={project} headingLevel="h3" />
-                ))}
+            <div data-reveal>
+                <p class="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-accent mb-3">02 / Selected Work</p>
+                <h2 class="text-2xl font-display font-semibold tracking-tight mb-8 sm:text-3xl">Case studies</h2>
             </div>
-            <div class="mt-10">
+            <div class="space-y-6">
+                {featuredProjects.map((project, i) => {
+                    const term = terminals[project.slug];
+                    return (
+                        <div
+                            class:list={['spot-card rounded-2xl p-6 sm:p-8 grid gap-8 items-center', 'lg:grid-cols-2']}
+                            data-reveal
+                        >
+                            <div class:list={[i % 2 === 1 && 'lg:order-2']}>
+                                <span class="font-mono text-[10px] tracking-[0.16em] text-accent/70">{String(i + 1).padStart(2, '0')}</span>
+                                <h3 class="mt-3 text-xl sm:text-2xl font-display font-semibold tracking-tight leading-snug">
+                                    {project.data.title}
+                                </h3>
+                                {project.data.description && (
+                                    <p class="mt-3 text-sm sm:text-base text-main/55 leading-relaxed">{project.data.description}</p>
+                                )}
+                                <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
+                                    {project.data.website && (
+                                        <a
+                                            class="group inline-flex items-center gap-2 text-sm font-semibold text-accent"
+                                            href={project.data.website}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            Visit live site
+                                            <span class="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true">&#8599;</span>
+                                        </a>
+                                    )}
+                                    <a
+                                        class="group inline-flex items-center gap-2 text-sm font-semibold text-main/60 hover:text-accent transition-colors duration-200"
+                                        href={`/projects/${project.slug}/`}
+                                    >
+                                        Read the case study
+                                        <span class="transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+                                    </a>
+                                </div>
+                            </div>
+                            {term ? (
+                                <div class:list={['rounded-xl overflow-hidden border border-main/15 bg-[#0d1117] shadow-lg', i % 2 === 1 && 'lg:order-1']} aria-hidden="true">
+                                    <div class="flex items-center gap-1.5 px-4 py-2.5 border-b border-white/10 bg-white/[0.03]">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-[#28c840]"></span>
+                                        <span class="ml-2 font-mono text-[10px] text-white/40">{term.title}</span>
+                                    </div>
+                                    <div class="p-4 sm:p-5 font-mono text-[11px] sm:text-xs leading-loose text-slate-300">
+                                        {term.lines.map((line) => (
+                                            <p class="whitespace-nowrap overflow-hidden text-ellipsis">
+                                                {line.kind === 'cmd' && <span class="text-emerald-400">$ </span>}
+                                                {line.kind === 'ok' && <span class="text-emerald-400">&check; </span>}
+                                                {line.kind === 'out' && <span class="text-sky-400">&rsaquo; </span>}
+                                                <span class:list={[line.kind === 'cmd' ? 'text-slate-100' : 'text-slate-400']}>{line.text}</span>
+                                            </p>
+                                        ))}
+                                    </div>
+                                </div>
+                            ) : (
+                                <div class:list={[i % 2 === 1 && 'lg:order-1']} />
+                            )}
+                        </div>
+                    );
+                })}
+            </div>
+            <div class="mt-10" data-reveal>
                 <Button href="/projects">View All Projects</Button>
             </div>
         </section>
     )}
 
+    <!-- Tech ticker -->
+    <section class="mb-20 sm:mb-28" data-reveal aria-label="Technologies I work with">
+        <div class="marquee border-y border-main/10 py-4">
+            <div class="marquee-track">
+                {[0, 1].map((copy) => (
+                    <div class="flex items-center gap-11 shrink-0" aria-hidden={copy === 1 ? 'true' : undefined}>
+                        {ticker.map((tech) => (
+                            <span class="flex items-center gap-11 font-mono text-xs uppercase tracking-[0.18em] text-main/45 whitespace-nowrap">
+                                {tech}
+                                <span class="w-1 h-1 rounded-full bg-accent/40 inline-block"></span>
+                            </span>
+                        ))}
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills: interactive tab switcher -->
+    <section class="mb-20 sm:mb-28" id="skills">
+        <div data-reveal>
+            <p class="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-accent mb-3">03 / Expertise</p>
+            <h2 class="text-2xl font-display font-semibold tracking-tight mb-8 sm:text-3xl">What I work with</h2>
+        </div>
+        <div class="grid gap-4 md:grid-cols-[minmax(0,240px)_1fr] md:gap-8" data-reveal>
+            <div class="flex flex-row flex-wrap md:flex-col gap-1.5" role="tablist" aria-label="Skill areas">
+                {skills.map((skill, i) => (
+                    <button
+                        id={`skill-tab-${i}`}
+                        role="tab"
+                        aria-selected={i === 0 ? 'true' : 'false'}
+                        aria-controls={`skill-panel-${i}`}
+                        tabindex={i === 0 ? 0 : -1}
+                        class:list={[
+                            'skill-tab text-left px-4 py-2.5 rounded-lg text-sm font-medium border transition-all duration-200',
+                            i === 0
+                                ? 'border-accent/50 text-accent bg-accent/5'
+                                : 'border-transparent text-main/55 hover:text-main hover:border-main/20'
+                        ]}
+                    >
+                        {skill.area}
+                    </button>
+                ))}
+            </div>
+            <div class="relative min-h-[10rem]">
+                {skills.map((skill, i) => (
+                    <div
+                        id={`skill-panel-${i}`}
+                        role="tabpanel"
+                        aria-labelledby={`skill-tab-${i}`}
+                        class:list={['skill-panel spot-card rounded-xl p-6 sm:p-8', i === 0 ? '' : 'hidden']}
+                    >
+                        <p class="text-base sm:text-lg text-main/75 leading-relaxed mb-6">{skill.note}</p>
+                        <div class="flex flex-wrap gap-2">
+                            {skill.stack.map((item) => (
+                                <span class="font-mono text-xs text-main/65 border border-main/20 rounded-md px-3 py-1.5">{item}</span>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="mb-20 sm:mb-28">
+        <div data-reveal>
+            <p class="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-accent mb-3">04 / Process</p>
+            <h2 class="text-2xl font-display font-semibold tracking-tight mb-8 sm:text-3xl">How a project runs</h2>
+        </div>
+        <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {process.map((phase, i) => (
+                <li class="relative pl-5 border-l-2 border-main/15 py-1" data-reveal style={`--reveal-delay: ${i * 90}ms`}>
+                    <span class="absolute -left-[5px] top-2 w-2 h-2 rounded-full bg-accent"></span>
+                    <p class="font-mono text-[10px] tracking-[0.16em] text-accent/70 mb-1.5">{phase.step}</p>
+                    <h3 class="text-base font-display font-semibold tracking-tight mb-2">{phase.title}</h3>
+                    <p class="text-xs sm:text-sm text-main/55 leading-relaxed">{phase.text}</p>
+                </li>
+            ))}
+        </ol>
+    </section>
+
     {featuredPosts?.length > 0 && (
         <section class="mb-20 sm:mb-28">
-            <p class="text-[11px] uppercase tracking-[0.2em] font-semibold text-accent mb-3">Writing</p>
-            <h2 class="text-2xl font-serif font-medium tracking-tight mb-6 sm:text-3xl">Latest Articles</h2>
-            <div>
+            <div data-reveal>
+                <p class="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-accent mb-3">05 / Writing</p>
+                <h2 class="text-2xl font-display font-semibold tracking-tight mb-6 sm:text-3xl">Latest Articles</h2>
+            </div>
+            <div data-reveal>
                 {featuredPosts.map((post) => (
                     <PostPreview post={post} headingLevel="h3" />
                 ))}
             </div>
-            <div class="mt-10">
+            <div class="mt-10" data-reveal>
                 <Button href="/blog">View All Posts</Button>
             </div>
         </section>
     )}
+
+    <!-- Closing note -->
+    <section class="mb-20 sm:mb-28" data-reveal>
+        <div class="spot-card rounded-2xl px-8 py-14 sm:px-14 sm:py-16 text-center">
+            <p class="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-accent mb-4">06 / Contact</p>
+            <h2 class="text-3xl sm:text-4xl font-display font-semibold tracking-tight max-w-xl mx-auto">
+                Got a project or a role in mind?
+                <span class="relative inline-block">
+                    Let's talk.
+                    <svg
+                        class="absolute left-0 -bottom-1.5 w-full h-2.5 text-accent"
+                        viewBox="0 0 120 10"
+                        preserveAspectRatio="none"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        aria-hidden="true"
+                    >
+                        <path d="M3 7 Q 30 2 60 6 T 117 5" />
+                    </svg>
+                </span>
+            </h2>
+            <p class="mt-5 max-w-md mx-auto text-sm sm:text-base text-main/60 leading-relaxed">
+                My inbox is open, and I usually reply within a day or two. Worst case, you get a polite no and a book recommendation.
+            </p>
+            <div class="mt-8 flex flex-wrap justify-center gap-3">
+                <Button href="/contact" variant="primary">Say Hello</Button>
+                <Button href="/projects">See My Work First</Button>
+            </div>
+        </div>
+    </section>
 </BaseLayout>
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        // Count-up stats when they scroll into view
+        const counters = document.querySelectorAll<HTMLElement>('.stat-counter');
+        if (counters.length) {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const animate = (el: HTMLElement) => {
+                const end = parseInt(el.dataset.count || '0', 10);
+                if (reduceMotion) {
+                    el.textContent = String(end);
+                    return;
+                }
+                const duration = 1100;
+                const start = performance.now();
+                const step = (now: number) => {
+                    const t = Math.min((now - start) / duration, 1);
+                    el.textContent = String(Math.round(end * (1 - Math.pow(1 - t, 3))));
+                    if (t < 1) requestAnimationFrame(step);
+                };
+                requestAnimationFrame(step);
+            };
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            animate(entry.target as HTMLElement);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.4 }
+            );
+            counters.forEach((el) => observer.observe(el));
+        }
+
+        // Skills tab switcher
+        const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.skill-tab'));
+        const panels = Array.from(document.querySelectorAll<HTMLElement>('.skill-panel'));
+        if (tabs.length) {
+            const activeClasses = ['border-accent/50', 'text-accent', 'bg-accent/5'];
+            const inactiveClasses = ['border-transparent', 'text-main/55', 'hover:text-main', 'hover:border-main/20'];
+            const select = (index: number) => {
+                tabs.forEach((tab, i) => {
+                    const active = i === index;
+                    tab.setAttribute('aria-selected', String(active));
+                    tab.tabIndex = active ? 0 : -1;
+                    tab.classList.remove(...(active ? inactiveClasses : activeClasses));
+                    tab.classList.add(...(active ? activeClasses : inactiveClasses));
+                    panels[i]?.classList.toggle('hidden', !active);
+                });
+            };
+            tabs.forEach((tab, i) => {
+                tab.addEventListener('click', () => select(i));
+                tab.addEventListener('keydown', (e) => {
+                    const dir = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+                    if (!dir) return;
+                    e.preventDefault();
+                    const next = (i + dir + tabs.length) % tabs.length;
+                    select(next);
+                    tabs[next].focus();
+                });
+            });
+        }
+    });
+</script>

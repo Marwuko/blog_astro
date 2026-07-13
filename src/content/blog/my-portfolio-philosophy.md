@@ -9,7 +9,7 @@ tags:
   - Design
 ---
 
-I treat my portfolio projects like real products — not just demonstrations.
+I treat my portfolio projects like real products, not just demonstrations.
 
 Here’s the philosophy that guides everything I build:
 
@@ -37,4 +37,4 @@ Every project should explain:
 - who it helps  
 - what you learned  
 
-This makes your work memorable and meaningful — not just “another GitHub repo.”
+This makes your work memorable and meaningful, not just “another GitHub repo.”

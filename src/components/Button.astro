@@ -7,10 +7,11 @@ type Props = ButtonProps | AnchorProps;
 
 const { href, class: className, variant = 'ghost', ...rest } = Astro.props;
 
-const base = 'inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold tracking-wide rounded-lg transition-all duration-200 gap-2';
+const base =
+    'inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold tracking-wide rounded-lg transition-all duration-300 gap-2';
 const variants: Record<string, string> = {
-    primary: 'bg-accent text-white border border-accent hover:opacity-85 shadow-lg shadow-accent/20',
-    ghost: 'bg-transparent text-main border border-main/25 hover:border-accent/60 hover:text-accent hover:bg-accent/5'
+    primary: 'bg-accent text-white dark:text-black/85 border border-accent hover:opacity-90 hover:-translate-y-px active:translate-y-0',
+    ghost: 'glass-panel text-main hover:border-accent/60 hover:text-accent hover:bg-accent/5 hover:-translate-y-px active:translate-y-0'
 };
 const cls = `${base} ${variants[variant as string] ?? variants.ghost}`;
 ---

@@ -19,7 +19,7 @@ Three months of challenging projects, cloud workflows, and real mentorship.
 - AWS-based workflows for training and inference  
 
 ## What Surprised Me
-The most valuable part wasn’t the code —  
+The most valuable part wasn’t the code,  
 it was learning **how to think like an AI engineer**:
 
 - debugging GPU issues  
@@ -32,4 +32,4 @@ It gave me the confidence to take on bigger AI projects and understand
 what production-level AI systems require beyond just “model accuracy.”
 
 If you are considering a serious path into applied AI,  
-this program will push you — in a good way.
+this program will push you, in a good way.

@@ -4,42 +4,50 @@ import Button from './Button.astro';
 import siteConfig from '../data/site-config';
 
 const hero = siteConfig.hero;
-const subtitle = siteConfig.subtitle;
+
+const typedWords = ['AI assistants.', 'data pipelines.', 'BI dashboards.', 'legal databases.', 'useful automation.'];
+
+const credentials = ['B.S. Information Technology', 'AWS AI Scientist Program', 'Woosong University TA'];
+
+const liveProducts = [
+    { name: 'flexaipos.com', href: 'https://www.flexaipos.com', label: 'FlexAI POS' },
+    { name: 'technabi.com', href: 'https://technabi.com', label: 'Technabi' }
+];
 ---
 
 {(hero?.title || hero?.text || (hero?.actions && hero.actions.length > 0)) && (
-    <section class="relative w-full mb-24 sm:mb-32 pt-8 pb-8">
-        <!-- Ambient glow -->
-        <div class="pointer-events-none absolute -top-20 -left-20 w-96 h-96 bg-accent/8 rounded-full blur-3xl"></div>
-        <div class="pointer-events-none absolute top-40 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl"></div>
+    <section class="relative w-full mb-24 sm:mb-32 pt-10 pb-8">
+        <div class="mb-8" data-reveal>
+            <span class="inline-flex items-center gap-2.5 text-[11px] font-mono uppercase tracking-[0.18em] font-medium glass-panel text-main/80 px-4 py-2 rounded-full">
+                <span class="pulse-dot w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>
+                Available for work
+            </span>
+        </div>
 
-        <!-- Badge -->
-        {subtitle && (
-            <div class="mb-8">
-                <span class="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] font-semibold text-accent border border-accent/30 bg-accent/8 px-4 py-2 rounded-full">
-                    <span class="w-1.5 h-1.5 rounded-full bg-accent inline-block"></span>
-                    {subtitle}
-                </span>
-            </div>
-        )}
-
-        <div class="grid gap-14 items-center lg:grid-cols-[1.15fr_0.85fr]">
+        <div class="grid gap-14 items-center lg:grid-cols-[1.2fr_0.8fr]">
             <!-- LEFT: text -->
             <div class="space-y-8">
-                {hero.title && (
-                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-serif font-medium tracking-tight leading-[1.05]">
-                        {hero.title}
+                <div data-reveal>
+                    <p class="font-mono text-sm text-accent mb-4">Hi, I'm Felix Marwuko.</p>
+                    <h1 class="text-5xl sm:text-6xl lg:text-[4.25rem] font-display font-semibold tracking-tight leading-[1.06]">
+                        I build<br />
+                        <span class="text-accent" id="typed-target" data-words={JSON.stringify(typedWords)}>{typedWords[0]}</span><span
+                            class="typed-caret"
+                            aria-hidden="true"></span>
                     </h1>
-                )}
+                </div>
 
                 {hero.text && (
-                    <div class="max-w-xl text-base sm:text-lg text-main/65 leading-relaxed prose prose-dante"
+                    <div
+                        class="max-w-xl text-base sm:text-lg text-main/65 leading-relaxed prose prose-dante"
+                        data-reveal
+                        style="--reveal-delay: 100ms"
                         set:html={marked.parse(hero.text)}
                     />
                 )}
 
                 {hero.actions && hero.actions.length > 0 && (
-                    <div class="flex flex-wrap gap-3 pt-1">
+                    <div class="flex flex-wrap gap-3 pt-1" data-reveal style="--reveal-delay: 180ms">
                         {hero.actions.map((action, i) => (
                             <Button href={action.href} variant={i === 0 ? 'primary' : 'ghost'}>
                                 {action.text}
@@ -48,31 +56,105 @@ const subtitle = siteConfig.subtitle;
                     </div>
                 )}
 
-                <!-- Trust indicators -->
-                <div class="flex flex-wrap gap-x-6 gap-y-2 pt-2 text-xs text-main/35 font-medium uppercase tracking-widest">
-                    <span>B.S. Information Technology</span>
-                    <span>·</span>
-                    <span>AWS AI Scientist</span>
-                    <span>·</span>
-                    <span>Woosong University TA</span>
+                <!-- Shipped and running in production -->
+                <div class="pt-2" data-reveal style="--reveal-delay: 220ms">
+                    <p class="text-[10px] font-mono uppercase tracking-[0.18em] text-main/40 mb-2.5">Now live in production</p>
+                    <div class="flex flex-wrap gap-2.5">
+                        {liveProducts.map((product) => (
+                            <a
+                                href={product.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="group inline-flex items-center gap-2.5 glass-panel rounded-lg px-4 py-2.5 transition-all duration-200 hover:border-accent/60 hover:-translate-y-px"
+                            >
+                                <span class="pulse-dot w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>
+                                <span class="text-sm font-semibold">{product.label}</span>
+                                <span class="font-mono text-[11px] text-main/45 group-hover:text-accent transition-colors duration-200">
+                                    {product.name} &#8599;
+                                </span>
+                            </a>
+                        ))}
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2 pt-2" data-reveal style="--reveal-delay: 260ms">
+                    {credentials.map((item) => (
+                        <span class="text-[10px] font-mono uppercase tracking-[0.14em] text-main/50 border border-main/15 rounded-md px-3 py-1.5">
+                            {item}
+                        </span>
+                    ))}
                 </div>
             </div>
 
-            <!-- RIGHT: image with glow frame -->
+            <!-- RIGHT: portrait, framed like a print -->
             {hero.image?.src && (
-                <figure class="relative mt-4 lg:mt-0">
-                    <div class="absolute -inset-px bg-gradient-to-br from-accent/30 via-accent/10 to-transparent rounded-2xl blur-sm"></div>
-                    <div class="relative overflow-hidden rounded-2xl border border-accent/20 bg-surface">
+                <figure
+                    class="relative mt-4 lg:mt-0 max-w-sm mx-auto lg:mx-0 lg:justify-self-end lg:rotate-1 transition-transform duration-500 hover:rotate-0"
+                    data-reveal
+                    style="--reveal-delay: 150ms"
+                >
+                    <div class="overflow-hidden rounded-lg border border-main/15 bg-surface p-2.5 pb-0 shadow-xl shadow-black/10 dark:shadow-black/40">
                         <img
-                            class="w-full h-full object-cover"
+                            class="w-full aspect-[4/5] object-cover object-top rounded-[4px]"
                             src={hero.image.src}
+                            width="900"
+                            height="1123"
                             loading="eager"
                             decoding="async"
                             alt={hero.image.alt || ''}
                         />
+                        <figcaption class="flex items-center justify-between px-1 py-2.5 font-mono text-[10px] uppercase tracking-[0.16em] text-main/45">
+                            <span>Felix Marwuko</span>
+                            <span>Daejeon, KR</span>
+                        </figcaption>
                     </div>
                 </figure>
             )}
         </div>
     </section>
 )}
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        const target = document.getElementById('typed-target');
+        if (!target || target.dataset.typedInit) return;
+        target.dataset.typedInit = 'true';
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        const words = JSON.parse(target.dataset.words || '[]');
+        if (!words.length) return;
+
+        let wordIndex = 0;
+        let charIndex = words[0].length;
+        let deleting = true;
+        let timer: ReturnType<typeof setTimeout>;
+
+        const tick = () => {
+            const word = words[wordIndex];
+            if (deleting) {
+                charIndex--;
+                target.textContent = word.slice(0, charIndex);
+                if (charIndex === 0) {
+                    deleting = false;
+                    wordIndex = (wordIndex + 1) % words.length;
+                    timer = setTimeout(tick, 350);
+                    return;
+                }
+                timer = setTimeout(tick, 38);
+            } else {
+                charIndex++;
+                target.textContent = words[wordIndex].slice(0, charIndex);
+                if (charIndex === words[wordIndex].length) {
+                    deleting = true;
+                    timer = setTimeout(tick, 2400);
+                    return;
+                }
+                timer = setTimeout(tick, 65);
+            }
+        };
+
+        timer = setTimeout(tick, 2000);
+        document.addEventListener('astro:before-swap', () => clearTimeout(timer), { once: true });
+    });
+</script>

@@ -6,29 +6,39 @@ import siteConfig from '../data/site-config';
 const navLinks = siteConfig.headerNavLinks || [];
 ---
 
-<nav class="sticky top-0 z-50 bg-main/85 backdrop-blur-xl border-b border-main/20">
-    <div class="w-full max-w-4xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
-        <!-- Brand name -->
-        <a
-            href="/"
-            class="font-serif text-xl font-medium tracking-tight transition-colors duration-200 hover:text-accent"
-        >
-            Felix Marwuko
+<nav class="sticky top-0 z-50 glass-panel border-x-0 border-t-0 !bg-main/70">
+    <div class="w-full max-w-4xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
+        <!-- Brand: stamped monogram + name -->
+        <a href="/" class="group flex items-center gap-3">
+            <span
+                class="w-9 h-9 rounded-lg border-2 border-main/70 grid place-items-center font-mono text-xs font-semibold tracking-tight transition-all duration-300 group-hover:border-accent group-hover:text-accent group-hover:-rotate-6"
+            >
+                FM
+            </span>
+            <span class="font-display text-lg font-semibold tracking-tight transition-colors duration-200 group-hover:text-accent">
+                Felix Marwuko
+            </span>
         </a>
 
         {navLinks.length > 0 && (
             <>
                 <!-- Desktop navigation -->
-                <div class="hidden md:flex items-center gap-8">
+                <div class="hidden md:flex items-center gap-7">
                     {navLinks.map((link) => (
                         <NavLink
-                            class="text-[11px] uppercase tracking-[0.15em] font-medium transition-colors duration-200 hover:text-accent"
+                            class="relative py-1 text-[11px] uppercase tracking-[0.18em] font-mono font-medium text-main/70 transition-colors duration-200 hover:text-accent after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
                             href={link.href}
                         >
                             {link.text}
                         </NavLink>
                     ))}
                     <ThemeToggle />
+                    <a
+                        href="/contact"
+                        class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-wide rounded-lg bg-accent text-white dark:text-black/85 border border-accent transition-all duration-200 hover:opacity-90 hover:-translate-y-px"
+                    >
+                        Hire Me
+                    </a>
                 </div>
 
                 <!-- Mobile: theme toggle + hamburger -->
@@ -51,7 +61,7 @@ const navLinks = siteConfig.headerNavLinks || [];
     {navLinks.length > 0 && (
         <ul
             id="menu-items"
-            class="menu absolute left-0 right-0 top-full bg-main border-b border-main/20 shadow-sm invisible opacity-0 md:hidden"
+            class="menu absolute left-0 right-0 top-full glass-panel !bg-main/90 border-x-0 shadow-lg invisible opacity-0 md:hidden"
         >
             {navLinks.map((link) => (
                 <li class="border-b border-main/10 last:border-0">

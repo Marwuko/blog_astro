@@ -21,7 +21,7 @@ You agree to use the Website for lawful purposes only. You are responsible for a
 Some areas may require registration. You agree to provide accurate information and safeguard your credentials.
 
 ## 5. Content & Intellectual Property
-All Website content—text, images, code, media—is owned or licensed by us. Unauthorized duplication is prohibited.
+All Website content (text, images, code, media) is owned or licensed by us. Unauthorized duplication is prohibited.
 
 ## 6. Third-Party Links
 We are not responsible for external websites or services linked from this site.

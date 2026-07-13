@@ -15,7 +15,7 @@ tags:
 
 In July 2025, I received a **Commendation Award** in **The 21st English Economic Essay Contest**, hosted by **The Korea Times** and **Woori Bank**.
 
-My essay, titled **“Bridging borders in banking: Foreigner’s perspective,”** explored how Korea’s financial system can become more inclusive for foreigners—focusing on:
+My essay, titled **“Bridging borders in banking: Foreigner’s perspective,”** explored how Korea’s financial system can become more inclusive for foreigners, focusing on:
 
 - Everyday barriers like language and documentation  
 - The digital gap in mobile banking and fintech  

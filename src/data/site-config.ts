@@ -1,10 +1,37 @@
+export type Image = { src: string; alt?: string };
+export type Link = { text: string; href: string };
+
+export type SiteConfig = {
+    title: string;
+    subtitle?: string;
+    description: string;
+    image?: Image;
+    logo?: Image;
+    headerNavLinks?: Link[];
+    footerNavLinks?: Link[];
+    socialLinks?: Link[];
+    hero?: {
+        title?: string;
+        text?: string;
+        image?: Image;
+        actions?: Link[];
+    };
+    subscribe?: {
+        title?: string;
+        text?: string;
+        formUrl: string;
+    };
+    postsPerPage?: number;
+    projectsPerPage?: number;
+};
+
 const siteConfig: SiteConfig = {
     title: 'Felix Marwuko – AI, Data & Systems',
     subtitle: 'AI · Data · Systems',
     description: 'Portfolio and blog of Felix Marwuko, focusing on AI, data systems, and automation projects.',
     image: {
-        src: '/Hero.png',
-        alt: 'AI and data systems hero illustration'
+        src: '/felix.jpg',
+        alt: 'Portrait of Felix Marwuko'
     },
     headerNavLinks: [
         { text: 'Home', href: '/' },
@@ -32,16 +59,16 @@ const siteConfig: SiteConfig = {
         }
     ],
     hero: {
-        // 👇 Focus the big heading on your role; your name already appears in the site title
-        title: 'AI, Data & Systems Builder',
+        // The headline itself lives in Hero.astro (it has a typewriter effect); this text sits under it
+        title: 'I build things with data',
         text: `
-I’m **Felix Marwuko**, an IT and data professional based in South Korea. I recently completed my **B.S. in Information Technology (Data Science)** at **University of Massachusetts Global**, and I support teaching and analytics as a **Teaching Assistant at Woosong University**.
+I’m **Felix Marwuko**, an IT and data professional based in South Korea. I finished my **B.S. in Information Technology (Data Science)** at **University of Massachusetts Global**, and I support teaching and analytics as a **Teaching Assistant at Woosong University**.
 
-I build practical systems at the intersection of **AI, databases, and automation**—from AI-powered assistants that connect to everyday tools to data-driven decision systems for real businesses.
+Most days you’ll find me wiring AI assistants into everyday tools, designing database schemas, or turning a messy spreadsheet into something a business can actually use.
 `,
         image: {
-            src: '/Hero.png',
-            alt: 'Abstract illustration of AI, data, and systems'
+            src: '/felix.jpg',
+            alt: 'Portrait of Felix Marwuko'
         },
         actions: [
             {
@@ -55,8 +82,8 @@ I build practical systems at the intersection of **AI, databases, and automation
         ]
     },
     subscribe: {
-        title: 'Stay updated',
-        text: 'Occasional updates on projects, lessons learned, and experiments in AI and data.',
+        title: 'Once in a while, I write things down',
+        text: 'No schedule, no spam. Just occasional notes on projects, lessons learned, and experiments in AI and data.',
         formUrl: '#'
     },
     postsPerPage: 8,

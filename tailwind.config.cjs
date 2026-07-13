@@ -4,24 +4,28 @@ module.exports = {
     darkMode: 'class',
     theme: {
         fontFamily: {
-            sans: ['"Plus Jakarta Sans"', ...defaultTheme.fontFamily.sans],
-            serif: ['"Cormorant Garamond"', ...defaultTheme.fontFamily.serif]
+            sans: ['Inter', ...defaultTheme.fontFamily.sans],
+            display: ['"Space Grotesk"', ...defaultTheme.fontFamily.sans],
+            // Legacy alias: headings across the site use font-serif, keep it pointing at the display face
+            serif: ['"Space Grotesk"', ...defaultTheme.fontFamily.sans],
+            mono: ['"JetBrains Mono"', ...defaultTheme.fontFamily.mono]
         },
         extend: {
-            textColor: {
-                main: 'rgb(var(--color-text-main) / <alpha-value>)',
+            colors: {
                 accent: 'rgb(var(--color-accent) / <alpha-value>)'
+            },
+            textColor: {
+                main: 'rgb(var(--color-text-main) / <alpha-value>)'
             },
             backgroundColor: {
                 main: 'rgb(var(--color-bg-main) / <alpha-value>)',
                 muted: 'rgb(var(--color-bg-muted) / <alpha-value>)',
-                surface: 'rgb(var(--color-bg-surface) / <alpha-value>)',
-                accent: 'rgb(var(--color-accent) / <alpha-value>)'
+                surface: 'rgb(var(--color-bg-surface) / <alpha-value>)'
             },
             borderColor: {
-                main: 'rgb(var(--color-border-main) / <alpha-value>)',
-                accent: 'rgb(var(--color-accent) / <alpha-value>)'
+                main: 'rgb(var(--color-border-main) / <alpha-value>)'
             },
+
             typography: (theme) => ({
                 dante: {
                     css: {
@@ -57,23 +61,22 @@ module.exports = {
                             }
                         },
                         'h1,h2,h3,h4,h5,h6': {
-                            fontFamily: theme('fontFamily.serif'),
-                            fontWeight: 500,
+                            fontFamily: theme('fontFamily.display'),
+                            fontWeight: 600,
                             letterSpacing: '-0.02em'
                         },
                         blockquote: {
                             border: 0,
                             borderLeft: '2px solid rgb(var(--color-accent))',
-                            fontFamily: theme('fontFamily.serif'),
-                            fontSize: '1.3125em',
-                            fontStyle: 'italic',
+                            fontSize: '1.125em',
+                            fontStyle: 'normal',
                             fontWeight: 'normal',
-                            lineHeight: 1.4,
+                            lineHeight: 1.6,
                             paddingLeft: '1.5rem',
-                            '@media (min-width: theme("screens.sm"))': {
-                                fontSize: '1.5em',
-                                lineHeight: 1.3
-                            }
+                            color: 'rgb(var(--color-text-main) / 0.75)'
+                        },
+                        code: {
+                            fontFamily: theme('fontFamily.mono')
                         }
                     }
                 },
