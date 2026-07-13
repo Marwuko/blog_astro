@@ -4,26 +4,185 @@
 
 @layer base {
     :root {
-        --color-text-main: 10 12 26;
-        --color-bg-main: 255 255 255;
-        --color-bg-muted: 244 246 252;
-        --color-bg-surface: 249 250 255;
-        --color-border-main: 220 224 240;
-        --color-accent: 79 70 229;
+        --color-text-main: 15 19 36;
+        --color-bg-main: 250 251 255;
+        --color-bg-muted: 243 246 252;
+        --color-bg-surface: 255 255 255;
+        --color-border-main: 222 228 244;
+        --color-accent: 37 99 235;
+        --color-accent-2: 124 58 237;
+        --glow-alpha: 0.14;
+        --grid-alpha: 0.55;
     }
     html.dark {
-        --color-text-main: 226 232 246;
-        --color-bg-main: 6 8 14;
-        --color-bg-muted: 10 13 22;
-        --color-bg-surface: 14 18 32;
-        --color-border-main: 28 33 58;
-        --color-accent: 129 140 248;
+        --color-text-main: 226 233 250;
+        --color-bg-main: 4 6 12;
+        --color-bg-muted: 8 11 20;
+        --color-bg-surface: 11 15 27;
+        --color-border-main: 31 38 64;
+        --color-accent: 56 189 248;
+        --color-accent-2: 167 139 250;
+        --glow-alpha: 0.28;
+        --grid-alpha: 0.4;
     }
-    html { scroll-behavior: smooth; }
-    ::selection { background-color: rgb(var(--color-accent) / 0.2); }
-    :focus-visible { outline: 2px solid rgb(var(--color-accent) / 0.6); outline-offset: 3px; border-radius: 2px; }
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgb(var(--color-border-main)); border-radius: 99px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgb(var(--color-accent) / 0.4); }
+    html {
+        scroll-behavior: smooth;
+    }
+    ::selection {
+        background-color: rgb(var(--color-accent) / 0.25);
+    }
+    :focus-visible {
+        outline: 2px solid rgb(var(--color-accent) / 0.6);
+        outline-offset: 3px;
+        border-radius: 2px;
+    }
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgb(var(--color-border-main));
+        border-radius: 99px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgb(var(--color-accent) / 0.4);
+    }
+}
+
+@layer components {
+    /* Gradient headline text */
+    .text-gradient {
+        background-image: linear-gradient(100deg, rgb(var(--color-accent)) 0%, rgb(var(--color-accent-2)) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    /* Frosted glass surface */
+    .glass-panel {
+        background-color: rgb(var(--color-bg-surface) / 0.65);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgb(var(--color-border-main) / 0.7);
+    }
+
+    /* Card with a gradient border that lights up on hover */
+    .holo-card {
+        position: relative;
+        background-color: rgb(var(--color-bg-surface) / 0.72);
+        border: 1px solid rgb(var(--color-border-main) / 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition:
+            border-color 0.3s ease,
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+    }
+    .holo-card::before {
+        content: '';
+        position: absolute;
+        inset: -1px;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(135deg, rgb(var(--color-accent) / 0.7), rgb(var(--color-accent-2) / 0.5) 55%, transparent);
+        -webkit-mask:
+            linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+        mask:
+            linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+    .holo-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 45px -18px rgb(var(--color-accent) / var(--glow-alpha));
+    }
+    .holo-card:hover::before {
+        opacity: 1;
+    }
+
+    /* Fixed background layers */
+    .bg-grid {
+        background-image:
+            linear-gradient(rgb(var(--color-border-main) / calc(var(--grid-alpha) * 0.6)) 1px, transparent 1px),
+            linear-gradient(90deg, rgb(var(--color-border-main) / calc(var(--grid-alpha) * 0.6)) 1px, transparent 1px);
+        background-size: 48px 48px;
+        -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, black 30%, transparent 75%);
+        mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, black 30%, transparent 75%);
+    }
+    .bg-orb {
+        border-radius: 9999px;
+        filter: blur(90px);
+        will-change: transform;
+        animation: orb-drift 22s ease-in-out infinite alternate;
+    }
+
+    /* Small pulsing status dot */
+    .pulse-dot {
+        position: relative;
+    }
+    .pulse-dot::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 9999px;
+        background: inherit;
+        animation: pulse-ping 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    /* Scroll-reveal animation (activated by BaseLayout script) */
+    [data-reveal] {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+            opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+            transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: var(--reveal-delay, 0ms);
+    }
+    [data-reveal].is-revealed {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes orb-drift {
+    0% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    100% {
+        transform: translate3d(4rem, 2.5rem, 0) scale(1.12);
+    }
+}
+
+@keyframes pulse-ping {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    80%,
+    100% {
+        transform: scale(2.6);
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    .bg-orb,
+    .pulse-dot::after {
+        animation: none;
+    }
+    [data-reveal] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }

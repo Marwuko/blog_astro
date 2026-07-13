@@ -21,8 +21,24 @@ const { showHeader = true, ...head } = Astro.props;
             }
         </script>
         <ViewTransitions />
+        <noscript>
+            <style>
+                [data-reveal] {
+                    opacity: 1 !important;
+                    transform: none !important;
+                }
+            </style>
+        </noscript>
     </head>
-    <body class="bg-main text-main">
+    <body class="bg-main text-main font-sans">
+        <!-- Ambient background: grid + drifting gradient orbs -->
+        <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
+            <div class="absolute inset-0 bg-grid"></div>
+            <div class="bg-orb absolute -top-40 left-[8%] w-[34rem] h-[34rem] bg-accent/15"></div>
+            <div class="bg-orb absolute top-[30%] -right-48 w-[30rem] h-[30rem] bg-accent-2/12 [animation-delay:-8s]"></div>
+            <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent"></div>
+        </div>
+
         <div class="flex flex-col min-h-screen">
             <Nav />
             {showHeader && <Header />}
@@ -31,5 +47,29 @@ const { showHeader = true, ...head } = Astro.props;
             </main>
             <Footer />
         </div>
+
+        <script>
+            function initReveal() {
+                const elements = document.querySelectorAll('[data-reveal]:not(.is-revealed)');
+                if (!elements.length) return;
+                if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    elements.forEach((el) => el.classList.add('is-revealed'));
+                    return;
+                }
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('is-revealed');
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    },
+                    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+                );
+                elements.forEach((el) => observer.observe(el));
+            }
+            document.addEventListener('astro:page-load', initReveal);
+        </script>
     </body>
 </html>

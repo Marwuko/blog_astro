@@ -1,3 +1,30 @@
+export type Image = { src: string; alt?: string };
+export type Link = { text: string; href: string };
+
+export type SiteConfig = {
+    title: string;
+    subtitle?: string;
+    description: string;
+    image?: Image;
+    logo?: Image;
+    headerNavLinks?: Link[];
+    footerNavLinks?: Link[];
+    socialLinks?: Link[];
+    hero?: {
+        title?: string;
+        text?: string;
+        image?: Image;
+        actions?: Link[];
+    };
+    subscribe?: {
+        title?: string;
+        text?: string;
+        formUrl: string;
+    };
+    postsPerPage?: number;
+    projectsPerPage?: number;
+};
+
 const siteConfig: SiteConfig = {
     title: 'Felix Marwuko – AI, Data & Systems',
     subtitle: 'AI · Data · Systems',
@@ -32,8 +59,8 @@ const siteConfig: SiteConfig = {
         }
     ],
     hero: {
-        // 👇 Focus the big heading on your role; your name already appears in the site title
-        title: 'AI, Data & Systems Builder',
+        // 👇 Focus the big heading on your role; text after '|' is rendered with a gradient highlight
+        title: 'Building intelligent systems|for what comes next.',
         text: `
 I’m **Felix Marwuko**, an IT and data professional based in South Korea. I recently completed my **B.S. in Information Technology (Data Science)** at **University of Massachusetts Global**, and I support teaching and analytics as a **Teaching Assistant at Woosong University**.
 

@@ -1,7 +1,7 @@
 ---
 import siteConfig from '../data/site-config';
 
-const navLinks = [
+const navLinks = siteConfig.footerNavLinks || [
     { text: 'About', href: '/about' },
     { text: 'Contact', href: '/contact' },
     { text: 'Terms', href: '/terms' }
@@ -10,52 +10,56 @@ const navLinks = [
 const socialLinks = siteConfig.socialLinks || [];
 ---
 
-<footer class="w-full max-w-4xl mx-auto px-4 md:px-8 mt-12 pt-12 pb-10 sm:pt-16 sm:pb-14 border-t border-main/10">
-    <div class="grid gap-8 sm:grid-cols-[1fr_auto]">
-        <!-- Brand identity -->
-        <div>
-            <a
-                href="/"
-                class="font-serif text-xl font-medium tracking-tight transition-colors duration-200 hover:text-accent"
-            >
-                Felix Marwuko
-            </a>
-            {siteConfig.subtitle && (
-                <p class="mt-1.5 text-sm text-main/50">
-                    {siteConfig.subtitle}
-                </p>
-            )}
+<footer class="relative w-full mt-12">
+    <!-- Gradient hairline -->
+    <div class="h-px w-full bg-gradient-to-r from-transparent via-accent/40 to-transparent" aria-hidden="true"></div>
+
+    <div class="w-full max-w-4xl mx-auto px-4 md:px-8 pt-12 pb-10 sm:pt-16 sm:pb-14">
+        <div class="grid gap-8 sm:grid-cols-[1fr_auto]">
+            <!-- Brand identity -->
+            <div>
+                <a href="/" class="group inline-flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-accent-2 text-white grid place-items-center font-display text-xs font-bold">
+                        FM
+                    </span>
+                    <span class="font-display text-xl font-semibold tracking-tight transition-colors duration-200 group-hover:text-accent">
+                        Felix Marwuko
+                    </span>
+                </a>
+                {siteConfig.subtitle && (
+                    <p class="mt-2.5 text-[11px] font-mono uppercase tracking-[0.18em] text-main/45">
+                        {siteConfig.subtitle}
+                    </p>
+                )}
+            </div>
+
+            <!-- Nav links -->
+            <div class="flex flex-wrap gap-x-6 gap-y-1 items-start">
+                {navLinks.map((link) => (
+                    <a class="text-sm font-medium transition-colors duration-200 hover:text-accent" href={link.href}>
+                        {link.text}
+                    </a>
+                ))}
+            </div>
         </div>
 
-        <!-- Nav links -->
-        <div class="flex flex-wrap gap-x-6 gap-y-1 items-start">
-            {navLinks.map((link) => (
-                <a
-                    class="text-sm font-medium transition-colors duration-200 hover:text-accent"
-                    href={link.href}
-                >
-                    {link.text}
-                </a>
-            ))}
+        <!-- Bottom bar -->
+        <div class="mt-10 pt-6 border-t border-main/10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex flex-wrap gap-x-5 gap-y-1">
+                {socialLinks.map((link) => (
+                    <a
+                        class="text-sm text-main/55 transition-colors duration-200 hover:text-accent"
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {link.text}
+                    </a>
+                ))}
+            </div>
+            <p class="text-xs font-mono text-main/35">
+                &copy; {new Date().getFullYear()} Felix Marwuko · Crafted with Astro
+            </p>
         </div>
-    </div>
-
-    <!-- Bottom bar -->
-    <div class="mt-10 pt-6 border-t border-main/10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div class="flex flex-wrap gap-x-5 gap-y-1">
-            {socialLinks.map((link) => (
-                <a
-                    class="text-sm text-main/55 transition-colors duration-200 hover:text-accent"
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    {link.text}
-                </a>
-            ))}
-        </div>
-        <p class="text-sm text-main/35">
-            &copy; {new Date().getFullYear()} Felix Marwuko
-        </p>
     </div>
 </footer>
