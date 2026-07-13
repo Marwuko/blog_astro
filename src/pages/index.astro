@@ -79,6 +79,26 @@ const skills = [
 
 // Hand-written terminal demos for the case study visuals, keyed by project slug
 const terminals: Record<string, { title: string; lines: { text: string; kind: 'cmd' | 'ok' | 'out' }[] }> = {
+    'flexai-pos': {
+        title: 'flexai-pos',
+        lines: [
+            { text: 'sale add --items 3 --pay mobile', kind: 'cmd' },
+            { text: 'receipt #10482 issued', kind: 'ok' },
+            { text: 'stock updated: 3 items deducted', kind: 'ok' },
+            { text: 'ai "what should I reorder this week?"', kind: 'cmd' },
+            { text: 'low stock flagged: 2 products need reordering', kind: 'out' }
+        ]
+    },
+    'technabi': {
+        title: 'technabi.com',
+        lines: [
+            { text: 'git push origin main', kind: 'cmd' },
+            { text: 'build passed, site deployed', kind: 'ok' },
+            { text: 'status technabi.com', kind: 'cmd' },
+            { text: 'ssl valid, sitemap indexed', kind: 'ok' },
+            { text: 'live and serving visitors', kind: 'out' }
+        ]
+    },
     'ghana-ai-law-assistant': {
         title: 'ghana-law-assistant',
         lines: [
@@ -205,13 +225,26 @@ const process = [
                                 {project.data.description && (
                                     <p class="mt-3 text-sm sm:text-base text-main/55 leading-relaxed">{project.data.description}</p>
                                 )}
-                                <a
-                                    class="group inline-flex items-center gap-2 mt-6 text-sm font-semibold text-accent"
-                                    href={`/projects/${project.slug}/`}
-                                >
-                                    Read the case study
-                                    <span class="transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
-                                </a>
+                                <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
+                                    {project.data.website && (
+                                        <a
+                                            class="group inline-flex items-center gap-2 text-sm font-semibold text-accent"
+                                            href={project.data.website}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            Visit live site
+                                            <span class="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true">&#8599;</span>
+                                        </a>
+                                    )}
+                                    <a
+                                        class="group inline-flex items-center gap-2 text-sm font-semibold text-main/60 hover:text-accent transition-colors duration-200"
+                                        href={`/projects/${project.slug}/`}
+                                    >
+                                        Read the case study
+                                        <span class="transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+                                    </a>
+                                </div>
                             </div>
                             {term ? (
                                 <div class:list={['rounded-xl overflow-hidden border border-main/15 bg-[#0d1117] shadow-lg', i % 2 === 1 && 'lg:order-1']} aria-hidden="true">

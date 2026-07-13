@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/Button.astro';
 import ProjectPreview from '../../components/ProjectPreview.astro';
 import { sortItemsByDateDesc } from '../../utils/data-utils';
 
@@ -20,7 +21,7 @@ export async function getStaticPaths() {
 type Props = { project: CollectionEntry<'projects'>; prevProject: CollectionEntry<'projects'>; nextProject: CollectionEntry<'projects'> };
 
 const { project, prevProject, nextProject } = Astro.props;
-const { title, description, seo } = project.data;
+const { title, description, website, seo } = project.data;
 const { Content } = await project.render();
 ---
 
@@ -28,6 +29,18 @@ const { Content } = await project.render();
     <article class="mb-16 sm:mb-24">
         <header class="mb-10">
             <h1 class="text-4xl leading-[1.1] font-serif font-medium tracking-tight sm:text-5xl sm:leading-[1.05]">{title}</h1>
+            {website && (
+                <div class="mt-6 flex flex-wrap items-center gap-4">
+                    <Button href={website} variant="primary" target="_blank" rel="noopener noreferrer">
+                        Visit Live Site
+                        <span aria-hidden="true">&#8599;</span>
+                    </Button>
+                    <span class="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.16em] text-main/50">
+                        <span class="pulse-dot w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
+                        In production
+                    </span>
+                </div>
+            )}
         </header>
         <div class="max-w-none prose prose-dante sm:prose-lg">
             <Content />
