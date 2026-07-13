@@ -30,8 +30,8 @@ const siteConfig: SiteConfig = {
     subtitle: 'AI · Data · Systems',
     description: 'Portfolio and blog of Felix Marwuko, focusing on AI, data systems, and automation projects.',
     image: {
-        src: '/Hero.png',
-        alt: 'AI and data systems hero illustration'
+        src: '/felix.jpg',
+        alt: 'Portrait of Felix Marwuko'
     },
     headerNavLinks: [
         { text: 'Home', href: '/' },
@@ -67,8 +67,8 @@ I’m **Felix Marwuko**, an IT and data professional based in South Korea. I fin
 Most days you’ll find me wiring AI assistants into everyday tools, designing database schemas, or turning a messy spreadsheet into something a business can actually use.
 `,
         image: {
-            src: '/about.jpeg',
-            alt: 'Felix working at his desk in the evening'
+            src: '/felix.jpg',
+            alt: 'Portrait of Felix Marwuko'
         },
         actions: [
             {

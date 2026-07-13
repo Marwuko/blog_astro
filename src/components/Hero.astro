@@ -60,20 +60,26 @@ const credentials = ['B.S. Information Technology', 'AWS AI Scientist Program', 
                 </div>
             </div>
 
-            <!-- RIGHT: photo, framed like a print -->
+            <!-- RIGHT: portrait, framed like a print -->
             {hero.image?.src && (
-                <figure class="relative mt-4 lg:mt-0 lg:rotate-1 transition-transform duration-500 hover:rotate-0" data-reveal style="--reveal-delay: 150ms">
+                <figure
+                    class="relative mt-4 lg:mt-0 max-w-sm mx-auto lg:mx-0 lg:justify-self-end lg:rotate-1 transition-transform duration-500 hover:rotate-0"
+                    data-reveal
+                    style="--reveal-delay: 150ms"
+                >
                     <div class="overflow-hidden rounded-lg border border-main/15 bg-surface p-2.5 pb-0 shadow-xl shadow-black/10 dark:shadow-black/40">
                         <img
-                            class="w-full h-full object-cover rounded-[4px] grayscale hover:grayscale-[60%] transition-[filter] duration-500"
+                            class="w-full aspect-[4/5] object-cover object-top rounded-[4px]"
                             src={hero.image.src}
+                            width="900"
+                            height="1123"
                             loading="eager"
                             decoding="async"
                             alt={hero.image.alt || ''}
                         />
                         <figcaption class="flex items-center justify-between px-1 py-2.5 font-mono text-[10px] uppercase tracking-[0.16em] text-main/45">
-                            <span>Daejeon, South Korea</span>
-                            <span>36.35° N, 127.38° E</span>
+                            <span>Felix Marwuko</span>
+                            <span>Daejeon, KR</span>
                         </figcaption>
                     </div>
                 </figure>
