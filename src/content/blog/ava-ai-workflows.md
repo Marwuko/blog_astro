@@ -10,7 +10,7 @@ tags:
 ---
 
 AVA (AI Virtual Assistant) started from a simple frustration: too much repetitive “click work.”  
-Updating Excel sheets, copying charts into PowerPoint, exporting dashboards — all tasks that drain time without adding much value.
+Updating Excel sheets, copying charts into PowerPoint, exporting dashboards: all tasks that drain time without adding much value.
 
 I wanted something that could understand *intent*, coordinate tools, and deliver results the way a real assistant would.
 
@@ -46,7 +46,7 @@ A central **AI Orchestrator** maps user intent to skills:
 - Automate repetitive reporting sequences  
 
 ## What I Learned
-Building AVA taught me that automation isn’t about replacing humans —  
+Building AVA taught me that automation isn’t about replacing humans,  
 it’s about eliminating tedious work so people can focus on thinking.
 
 This project continues to evolve, but it represents my broader interest in  

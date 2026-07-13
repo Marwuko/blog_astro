@@ -21,7 +21,7 @@ I use AI to break down long academic papers into structured summaries,
 but I always verify the references manually.
 
 ### 2. Cleaning Data  
-Pandas scripts, SQL cleanup, formatting — AI helps me work faster and avoid small mistakes.
+Pandas scripts, SQL cleanup, formatting: AI helps me work faster and avoid small mistakes.
 
 ### 3. TA Responsibilities  
 - Drafting rubric explanations  
@@ -34,5 +34,5 @@ Many of my portfolio systems (InvestWise, AutoDutyChecker, AVA)
 started as rough AI-assisted drafts and grew into full projects.
 
 ## The Rule That Matters
-AI doesn’t replace thinking — it *amplifies* it.  
+AI doesn’t replace thinking, it *amplifies* it.  
 When used well, it removes friction so you can focus on creativity and problem-solving.

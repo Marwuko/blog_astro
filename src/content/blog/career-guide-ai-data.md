@@ -10,7 +10,7 @@ tags:
 ---
 
 There’s a lot of noise online about how to enter the AI and data science field.  
-But from my own experience — studying, building projects, and securing hands-on roles —  
+But from my own experience of studying, building projects, and securing hands-on roles,  
 the journey becomes clearer when you focus on *practical* steps instead of hype.
 
 ## 1. Start With Solid Fundamentals
@@ -50,7 +50,7 @@ Then branch out later.
 ## 4. Showcase Your Work
 A portfolio website (like this one) is worth more than 100 certificates.
 
-Employers want proof — not just statements.
+Employers want proof, not just statements.
 
 ## 5. Stay Consistent
 Learning AI isn’t one big jump.  

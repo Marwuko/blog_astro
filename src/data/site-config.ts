@@ -59,16 +59,16 @@ const siteConfig: SiteConfig = {
         }
     ],
     hero: {
-        // 👇 Focus the big heading on your role; text after '|' is rendered with a gradient highlight
-        title: 'Building intelligent systems|for what comes next.',
+        // The headline itself lives in Hero.astro (it has a typewriter effect); this text sits under it
+        title: 'I build things with data',
         text: `
-I’m **Felix Marwuko**, an IT and data professional based in South Korea. I recently completed my **B.S. in Information Technology (Data Science)** at **University of Massachusetts Global**, and I support teaching and analytics as a **Teaching Assistant at Woosong University**.
+I’m **Felix Marwuko**, an IT and data professional based in South Korea. I finished my **B.S. in Information Technology (Data Science)** at **University of Massachusetts Global**, and I support teaching and analytics as a **Teaching Assistant at Woosong University**.
 
-I build practical systems at the intersection of **AI, databases, and automation**—from AI-powered assistants that connect to everyday tools to data-driven decision systems for real businesses.
+Most days you’ll find me wiring AI assistants into everyday tools, designing database schemas, or turning a messy spreadsheet into something a business can actually use.
 `,
         image: {
-            src: '/Hero.png',
-            alt: 'Abstract illustration of AI, data, and systems'
+            src: '/about.jpeg',
+            alt: 'Felix working at his desk in the evening'
         },
         actions: [
             {
@@ -82,8 +82,8 @@ I build practical systems at the intersection of **AI, databases, and automation
         ]
     },
     subscribe: {
-        title: 'Stay updated',
-        text: 'Occasional updates on projects, lessons learned, and experiments in AI and data.',
+        title: 'Once in a while, I write things down',
+        text: 'No schedule, no spam. Just occasional notes on projects, lessons learned, and experiments in AI and data.',
         formUrl: '#'
     },
     postsPerPage: 8,

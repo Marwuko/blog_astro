@@ -8,10 +8,10 @@ const navLinks = siteConfig.headerNavLinks || [];
 
 <nav class="sticky top-0 z-50 glass-panel border-x-0 border-t-0 !bg-main/70">
     <div class="w-full max-w-4xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-        <!-- Brand: gradient monogram + name -->
+        <!-- Brand: stamped monogram + name -->
         <a href="/" class="group flex items-center gap-3">
             <span
-                class="w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-accent-2 text-white grid place-items-center font-display text-sm font-bold shadow-glow-sm transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3"
+                class="w-9 h-9 rounded-lg border-2 border-main/70 grid place-items-center font-mono text-xs font-semibold tracking-tight transition-all duration-300 group-hover:border-accent group-hover:text-accent group-hover:-rotate-6"
             >
                 FM
             </span>
@@ -26,7 +26,7 @@ const navLinks = siteConfig.headerNavLinks || [];
                 <div class="hidden md:flex items-center gap-7">
                     {navLinks.map((link) => (
                         <NavLink
-                            class="relative py-1 text-[11px] uppercase tracking-[0.18em] font-mono font-medium text-main/70 transition-colors duration-200 hover:text-accent after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-0 after:bg-gradient-to-r after:from-accent after:to-accent-2 after:transition-all after:duration-300 hover:after:w-full"
+                            class="relative py-1 text-[11px] uppercase tracking-[0.18em] font-mono font-medium text-main/70 transition-colors duration-200 hover:text-accent after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
                             href={link.href}
                         >
                             {link.text}

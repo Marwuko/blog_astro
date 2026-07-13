@@ -4,43 +4,33 @@ import Button from './Button.astro';
 import siteConfig from '../data/site-config';
 
 const hero = siteConfig.hero;
-const subtitle = siteConfig.subtitle;
 
-// A '|' in the hero title marks where the gradient-highlighted part begins
-const [titlePlain, titleGradient] = (hero?.title || '').split('|');
+const typedWords = ['AI assistants.', 'data pipelines.', 'BI dashboards.', 'legal databases.', 'useful automation.'];
 
-const credentials = ['B.S. Information Technology', 'AWS AI Scientist', 'Woosong University TA'];
+const credentials = ['B.S. Information Technology', 'AWS AI Scientist Program', 'Woosong University TA'];
 ---
 
 {(hero?.title || hero?.text || (hero?.actions && hero.actions.length > 0)) && (
     <section class="relative w-full mb-24 sm:mb-32 pt-10 pb-8">
-        <!-- Status + domain badges -->
-        <div class="flex flex-wrap items-center gap-3 mb-8" data-reveal>
+        <div class="mb-8" data-reveal>
             <span class="inline-flex items-center gap-2.5 text-[11px] font-mono uppercase tracking-[0.18em] font-medium glass-panel text-main/80 px-4 py-2 rounded-full">
-                <span class="pulse-dot w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>
-                Open to opportunities
+                <span class="pulse-dot w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>
+                Available for work
             </span>
-            {subtitle && (
-                <span class="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.18em] font-medium text-accent border border-accent/30 bg-accent/10 px-4 py-2 rounded-full">
-                    {subtitle}
-                </span>
-            )}
         </div>
 
-        <div class="grid gap-14 items-center lg:grid-cols-[1.15fr_0.85fr]">
+        <div class="grid gap-14 items-center lg:grid-cols-[1.2fr_0.8fr]">
             <!-- LEFT: text -->
             <div class="space-y-8">
-                {hero.title && (
-                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-display font-semibold tracking-tight leading-[1.04]" data-reveal>
-                        {titlePlain}
-                        {titleGradient && (
-                            <>
-                                <br />
-                                <span class="text-gradient">{titleGradient}</span>
-                            </>
-                        )}
+                <div data-reveal>
+                    <p class="font-mono text-sm text-accent mb-4">Hi, I'm Felix Marwuko.</p>
+                    <h1 class="text-5xl sm:text-6xl lg:text-[4.25rem] font-display font-semibold tracking-tight leading-[1.06]">
+                        I build<br />
+                        <span class="text-accent" id="typed-target" data-words={JSON.stringify(typedWords)}>{typedWords[0]}</span><span
+                            class="typed-caret"
+                            aria-hidden="true"></span>
                     </h1>
-                )}
+                </div>
 
                 {hero.text && (
                     <div
@@ -56,13 +46,11 @@ const credentials = ['B.S. Information Technology', 'AWS AI Scientist', 'Woosong
                         {hero.actions.map((action, i) => (
                             <Button href={action.href} variant={i === 0 ? 'primary' : 'ghost'}>
                                 {action.text}
-                                {i === 0 && <span aria-hidden="true">→</span>}
                             </Button>
                         ))}
                     </div>
                 )}
 
-                <!-- Credentials -->
                 <div class="flex flex-wrap gap-2 pt-2" data-reveal style="--reveal-delay: 260ms">
                     {credentials.map((item) => (
                         <span class="text-[10px] font-mono uppercase tracking-[0.14em] text-main/50 border border-main/15 rounded-md px-3 py-1.5">
@@ -72,27 +60,69 @@ const credentials = ['B.S. Information Technology', 'AWS AI Scientist', 'Woosong
                 </div>
             </div>
 
-            <!-- RIGHT: image with gradient frame -->
+            <!-- RIGHT: photo, framed like a print -->
             {hero.image?.src && (
-                <figure class="relative mt-4 lg:mt-0" data-reveal style="--reveal-delay: 150ms">
-                    <div class="absolute -inset-1 bg-gradient-to-br from-accent/50 via-accent-2/25 to-transparent rounded-3xl blur-md opacity-70"></div>
-                    <div class="relative overflow-hidden rounded-2xl border border-accent/25 bg-surface shadow-glow">
+                <figure class="relative mt-4 lg:mt-0 lg:rotate-1 transition-transform duration-500 hover:rotate-0" data-reveal style="--reveal-delay: 150ms">
+                    <div class="overflow-hidden rounded-lg border border-main/15 bg-surface p-2.5 pb-0 shadow-xl shadow-black/10 dark:shadow-black/40">
                         <img
-                            class="w-full h-full object-cover"
+                            class="w-full h-full object-cover rounded-[4px] grayscale hover:grayscale-[60%] transition-[filter] duration-500"
                             src={hero.image.src}
                             loading="eager"
                             decoding="async"
                             alt={hero.image.alt || ''}
                         />
-                        <div class="absolute inset-0 bg-gradient-to-t from-main/40 via-transparent to-transparent"></div>
-                    </div>
-                    <!-- Floating chip -->
-                    <div class="absolute -bottom-4 -left-4 glass-panel rounded-xl px-4 py-3 shadow-lg">
-                        <p class="text-[10px] font-mono uppercase tracking-[0.16em] text-main/50">Based in</p>
-                        <p class="text-sm font-display font-semibold">South Korea 🇰🇷</p>
+                        <figcaption class="flex items-center justify-between px-1 py-2.5 font-mono text-[10px] uppercase tracking-[0.16em] text-main/45">
+                            <span>Daejeon, South Korea</span>
+                            <span>36.35° N, 127.38° E</span>
+                        </figcaption>
                     </div>
                 </figure>
             )}
         </div>
     </section>
 )}
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        const target = document.getElementById('typed-target');
+        if (!target || target.dataset.typedInit) return;
+        target.dataset.typedInit = 'true';
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        const words = JSON.parse(target.dataset.words || '[]');
+        if (!words.length) return;
+
+        let wordIndex = 0;
+        let charIndex = words[0].length;
+        let deleting = true;
+        let timer: ReturnType<typeof setTimeout>;
+
+        const tick = () => {
+            const word = words[wordIndex];
+            if (deleting) {
+                charIndex--;
+                target.textContent = word.slice(0, charIndex);
+                if (charIndex === 0) {
+                    deleting = false;
+                    wordIndex = (wordIndex + 1) % words.length;
+                    timer = setTimeout(tick, 350);
+                    return;
+                }
+                timer = setTimeout(tick, 38);
+            } else {
+                charIndex++;
+                target.textContent = words[wordIndex].slice(0, charIndex);
+                if (charIndex === words[wordIndex].length) {
+                    deleting = true;
+                    timer = setTimeout(tick, 2400);
+                    return;
+                }
+                timer = setTimeout(tick, 65);
+            }
+        };
+
+        timer = setTimeout(tick, 2000);
+        document.addEventListener('astro:before-swap', () => clearTimeout(timer), { once: true });
+    });
+</script>

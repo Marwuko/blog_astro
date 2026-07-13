@@ -14,42 +14,47 @@ const projects = (await getCollection('projects')).sort(sortItemsByDateDesc);
 const featuredProjects = projects.filter(({ data }) => data.isFeatured);
 
 const stats = [
-    { value: String(projects.length).padStart(2, '0'), label: 'Projects shipped' },
-    { value: String(posts.length).padStart(2, '0'), label: 'Articles written' },
-    { value: '06', label: 'Core skill areas' },
-    { value: '02', label: 'Continents worked across' }
+    { value: projects.length, label: 'Projects shipped' },
+    { value: posts.length, label: 'Posts written' },
+    { value: 6, label: 'Skill areas' },
+    { value: 2, label: 'Continents lived on' }
+];
+
+const ticker = [
+    'Python', 'SQL', 'PyTorch', 'HuggingFace', 'AWS', 'Power BI', 'Tableau', 'MySQL',
+    'TypeScript', 'Astro', 'React', 'Node.js', 'Tailwind CSS', 'pandas', 'R', 'Google Cloud'
 ];
 
 const skills = [
     {
         area: 'AI & Machine Learning',
-        stack: 'Python · PyTorch · HuggingFace · RAG · LLMs · Transformers',
-        icon: 'M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 3 3v1a3 3 0 0 1 1 5.24V17a3 3 0 0 1-3 3h-1a4 4 0 0 1-8 0H8a3 3 0 0 1-3-3v-.76A3 3 0 0 1 6 11v-1a3 3 0 0 1 3-3h-1V6a4 4 0 0 1 4-4Z'
+        stack: ['Python', 'PyTorch', 'HuggingFace', 'RAG', 'LLMs', 'Transformers'],
+        note: 'I care about models that ship, not models that stay in notebooks.'
     },
     {
         area: 'Data & Analytics',
-        stack: 'SQL · Power BI · Tableau · pandas · Excel · R',
-        icon: 'M3 3v18h18M8 17V9m5 8V5m5 12v-6'
+        stack: ['SQL', 'Power BI', 'Tableau', 'pandas', 'Excel', 'R'],
+        note: 'SQL first, always. The dashboards come after the questions are clear.'
     },
     {
         area: 'Cloud Platforms',
-        stack: 'AWS · Google Cloud · Automated Pipelines',
-        icon: 'M6.5 19a4.5 4.5 0 1 1 .42-8.98 6 6 0 0 1 11.58 1.6A3.5 3.5 0 0 1 17.5 19h-11Z'
+        stack: ['AWS', 'Google Cloud', 'Automated Pipelines'],
+        note: 'Trained on AWS through the AI Scientist program. I keep things simple and cheap.'
     },
     {
         area: 'Databases',
-        stack: 'MySQL · SQL Server · Schema Design · ER Diagrams',
-        icon: 'M12 3c4.42 0 8 1.34 8 3s-3.58 3-8 3-8-1.34-8-3 3.58-3 8-3Zm8 3v12c0 1.66-3.58 3-8 3s-8-1.34-8-3V6m16 6c0 1.66-3.58 3-8 3s-8-1.34-8-3'
+        stack: ['MySQL', 'SQL Server', 'Schema Design', 'ER Diagrams'],
+        note: 'A good schema saves months. I have learned this the hard way, twice.'
     },
     {
         area: 'Web Development',
-        stack: 'TypeScript · Astro · React · Node.js · Tailwind CSS',
-        icon: 'm8 8-4 4 4 4m8-8 4 4-4 4m-2.5-10-3 12'
+        stack: ['TypeScript', 'Astro', 'React', 'Node.js', 'Tailwind CSS'],
+        note: 'This site is hand-built with Astro. No page builders were harmed.'
     },
     {
         area: 'Systems & Automation',
-        stack: 'Data Pipelines · API Integration · Workflow Automation',
-        icon: 'M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm7.4 3a7.4 7.4 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7.5 7.5 0 0 0-2-1.2L14.5 3h-5l-.4 2.6a7.5 7.5 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6a7.4 7.4 0 0 0 0 2.4l-2 1.6 2 3.4 2.4-1a7.5 7.5 0 0 0 2 1.2l.4 2.6h5l.4-2.6a7.5 7.5 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.07-.4.1-.8.1-1.2Z'
+        stack: ['Data Pipelines', 'API Integration', 'Workflow Automation'],
+        note: 'If a task happens three times a week, I will probably script it.'
     }
 ];
 ---
@@ -57,12 +62,32 @@ const skills = [
 <BaseLayout title={siteConfig.title} description={siteConfig.description} image={siteConfig.image} showHeader={false}>
     <Hero />
 
-    <!-- Stats band -->
+    <!-- Tech ticker -->
+    <section class="mb-20 sm:mb-28" data-reveal aria-label="Technologies I work with">
+        <div class="marquee border-y border-main/10 py-4">
+            <div class="marquee-track">
+                {[0, 1].map((copy) => (
+                    <div class="flex items-center gap-11 shrink-0" aria-hidden={copy === 1 ? 'true' : undefined}>
+                        {ticker.map((tech) => (
+                            <span class="flex items-center gap-11 font-mono text-xs uppercase tracking-[0.18em] text-main/45 whitespace-nowrap">
+                                {tech}
+                                <span class="w-1 h-1 rounded-full bg-accent/40 inline-block"></span>
+                            </span>
+                        ))}
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats: numbers count up when scrolled into view -->
     <section class="mb-20 sm:mb-28" data-reveal>
-        <div class="holo-card rounded-2xl grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-main/10 overflow-hidden">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {stats.map((stat) => (
-                <div class="p-6 text-center">
-                    <p class="font-display text-3xl sm:text-4xl font-semibold text-gradient">{stat.value}</p>
+                <div class="spot-card rounded-xl p-6 text-center">
+                    <p class="font-display text-3xl sm:text-4xl font-semibold text-accent">
+                        <span class="stat-counter tabular-nums" data-count={stat.value}>0</span>
+                    </p>
                     <p class="mt-1.5 text-[10px] font-mono uppercase tracking-[0.16em] text-main/50">{stat.label}</p>
                 </div>
             ))}
@@ -84,24 +109,51 @@ const skills = [
         </div>
     </section>
 
-    <!-- Skills grid -->
-    <section class="mb-20 sm:mb-28">
+    <!-- Skills: interactive tab switcher -->
+    <section class="mb-20 sm:mb-28" id="skills">
         <div data-reveal>
             <p class="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-accent mb-3">02 / Expertise</p>
-            <h2 class="text-2xl font-display font-semibold tracking-tight mb-8 sm:text-3xl">Skills & Stack</h2>
+            <h2 class="text-2xl font-display font-semibold tracking-tight mb-8 sm:text-3xl">What I work with</h2>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {skills.map((skill, i) => (
-                <div class="holo-card p-5 rounded-xl" data-reveal style={`--reveal-delay: ${(i % 3) * 80}ms`}>
-                    <div class="w-9 h-9 mb-4 rounded-lg bg-accent/10 border border-accent/25 grid place-items-center text-accent">
-                        <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                            <path d={skill.icon} />
-                        </svg>
+        <div class="grid gap-4 md:grid-cols-[minmax(0,240px)_1fr] md:gap-8" data-reveal>
+            <!-- Tab list -->
+            <div class="flex flex-row flex-wrap md:flex-col gap-1.5" role="tablist" aria-label="Skill areas">
+                {skills.map((skill, i) => (
+                    <button
+                        id={`skill-tab-${i}`}
+                        role="tab"
+                        aria-selected={i === 0 ? 'true' : 'false'}
+                        aria-controls={`skill-panel-${i}`}
+                        tabindex={i === 0 ? 0 : -1}
+                        class:list={[
+                            'skill-tab text-left px-4 py-2.5 rounded-lg text-sm font-medium border transition-all duration-200',
+                            i === 0
+                                ? 'border-accent/50 text-accent bg-accent/5'
+                                : 'border-transparent text-main/55 hover:text-main hover:border-main/20'
+                        ]}
+                    >
+                        {skill.area}
+                    </button>
+                ))}
+            </div>
+            <!-- Panels -->
+            <div class="relative min-h-[10rem]">
+                {skills.map((skill, i) => (
+                    <div
+                        id={`skill-panel-${i}`}
+                        role="tabpanel"
+                        aria-labelledby={`skill-tab-${i}`}
+                        class:list={['skill-panel spot-card rounded-xl p-6 sm:p-8', i === 0 ? '' : 'hidden']}
+                    >
+                        <p class="text-base sm:text-lg text-main/75 leading-relaxed mb-6">{skill.note}</p>
+                        <div class="flex flex-wrap gap-2">
+                            {skill.stack.map((item) => (
+                                <span class="font-mono text-xs text-main/65 border border-main/20 rounded-md px-3 py-1.5">{item}</span>
+                            ))}
+                        </div>
                     </div>
-                    <h3 class="text-sm font-display font-semibold mb-2">{skill.area}</h3>
-                    <p class="text-xs font-mono text-main/50 leading-relaxed">{skill.stack}</p>
-                </div>
-            ))}
+                ))}
+            </div>
         </div>
     </section>
 
@@ -141,21 +193,101 @@ const skills = [
         </section>
     )}
 
-    <!-- Closing CTA -->
+    <!-- Closing note -->
     <section class="mb-20 sm:mb-28" data-reveal>
-        <div class="holo-card relative rounded-2xl px-8 py-14 sm:px-14 sm:py-16 text-center overflow-hidden">
-            <div class="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-48 bg-accent/20 blur-3xl rounded-full" aria-hidden="true"></div>
+        <div class="spot-card rounded-2xl px-8 py-14 sm:px-14 sm:py-16 text-center">
             <p class="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-accent mb-4">05 / Contact</p>
             <h2 class="text-3xl sm:text-4xl font-display font-semibold tracking-tight max-w-xl mx-auto">
-                Let's build <span class="text-gradient">what's next</span> together.
+                Got a project or a role in mind?
+                <span class="relative inline-block">
+                    Let's talk.
+                    <svg
+                        class="absolute left-0 -bottom-1.5 w-full h-2.5 text-accent"
+                        viewBox="0 0 120 10"
+                        preserveAspectRatio="none"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        aria-hidden="true"
+                    >
+                        <path d="M3 7 Q 30 2 60 6 T 117 5" />
+                    </svg>
+                </span>
             </h2>
-            <p class="mt-4 max-w-md mx-auto text-sm sm:text-base text-main/60 leading-relaxed">
-                Have a project in mind, or want to talk AI, data, and systems? I'm always open to interesting conversations and opportunities.
+            <p class="mt-5 max-w-md mx-auto text-sm sm:text-base text-main/60 leading-relaxed">
+                My inbox is open, and I usually reply within a day or two. Worst case, you get a polite no and a book recommendation.
             </p>
             <div class="mt-8 flex flex-wrap justify-center gap-3">
-                <Button href="/contact" variant="primary">Get in Touch <span aria-hidden="true">→</span></Button>
-                <Button href="/projects">Explore My Work</Button>
+                <Button href="/contact" variant="primary">Say Hello</Button>
+                <Button href="/projects">See My Work First</Button>
             </div>
         </div>
     </section>
 </BaseLayout>
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        // Count-up stats when they scroll into view
+        const counters = document.querySelectorAll<HTMLElement>('.stat-counter');
+        if (counters.length) {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const animate = (el: HTMLElement) => {
+                const end = parseInt(el.dataset.count || '0', 10);
+                if (reduceMotion) {
+                    el.textContent = String(end);
+                    return;
+                }
+                const duration = 1100;
+                const start = performance.now();
+                const step = (now: number) => {
+                    const t = Math.min((now - start) / duration, 1);
+                    el.textContent = String(Math.round(end * (1 - Math.pow(1 - t, 3))));
+                    if (t < 1) requestAnimationFrame(step);
+                };
+                requestAnimationFrame(step);
+            };
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            animate(entry.target as HTMLElement);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.4 }
+            );
+            counters.forEach((el) => observer.observe(el));
+        }
+
+        // Skills tab switcher
+        const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.skill-tab'));
+        const panels = Array.from(document.querySelectorAll<HTMLElement>('.skill-panel'));
+        if (tabs.length) {
+            const activeClasses = ['border-accent/50', 'text-accent', 'bg-accent/5'];
+            const inactiveClasses = ['border-transparent', 'text-main/55', 'hover:text-main', 'hover:border-main/20'];
+            const select = (index: number) => {
+                tabs.forEach((tab, i) => {
+                    const active = i === index;
+                    tab.setAttribute('aria-selected', String(active));
+                    tab.tabIndex = active ? 0 : -1;
+                    tab.classList.remove(...(active ? inactiveClasses : activeClasses));
+                    tab.classList.add(...(active ? activeClasses : inactiveClasses));
+                    panels[i]?.classList.toggle('hidden', !active);
+                });
+            };
+            tabs.forEach((tab, i) => {
+                tab.addEventListener('click', () => select(i));
+                tab.addEventListener('keydown', (e) => {
+                    const dir = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+                    if (!dir) return;
+                    e.preventDefault();
+                    const next = (i + dir + tabs.length) % tabs.length;
+                    select(next);
+                    tabs[next].focus();
+                });
+            });
+        }
+    });
+</script>

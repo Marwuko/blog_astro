@@ -34,4 +34,4 @@ I focus on dashboards that answer real questions, not just show charts.
 - Use simple colors  
 - Make every visual answer a question  
 
-Dashboards should guide decisions — that’s the standard I design for.
+Dashboards should guide decisions. That’s the standard I design for.

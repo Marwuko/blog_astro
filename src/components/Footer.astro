@@ -10,16 +10,13 @@ const navLinks = siteConfig.footerNavLinks || [
 const socialLinks = siteConfig.socialLinks || [];
 ---
 
-<footer class="relative w-full mt-12">
-    <!-- Gradient hairline -->
-    <div class="h-px w-full bg-gradient-to-r from-transparent via-accent/40 to-transparent" aria-hidden="true"></div>
-
+<footer class="relative w-full mt-12 border-t border-main/10">
     <div class="w-full max-w-4xl mx-auto px-4 md:px-8 pt-12 pb-10 sm:pt-16 sm:pb-14">
         <div class="grid gap-8 sm:grid-cols-[1fr_auto]">
             <!-- Brand identity -->
             <div>
                 <a href="/" class="group inline-flex items-center gap-3">
-                    <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-accent-2 text-white grid place-items-center font-display text-xs font-bold">
+                    <span class="w-8 h-8 rounded-lg border-2 border-main/70 grid place-items-center font-mono text-[10px] font-semibold transition-colors duration-200 group-hover:border-accent group-hover:text-accent">
                         FM
                     </span>
                     <span class="font-display text-xl font-semibold tracking-tight transition-colors duration-200 group-hover:text-accent">

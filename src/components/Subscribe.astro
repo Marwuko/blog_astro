@@ -9,8 +9,7 @@ const { class: className } = Astro.props;
 
 {
     subscribe?.formUrl && (
-        <section class:list={['holo-card relative rounded-2xl px-8 py-12 flex flex-col items-center text-center overflow-hidden sm:px-12 sm:py-16', className]}>
-            <div class="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 w-80 h-40 bg-accent/15 blur-3xl rounded-full" aria-hidden="true" />
+        <section class:list={['spot-card rounded-2xl px-8 py-12 flex flex-col items-center text-center overflow-hidden sm:px-12 sm:py-16', className]}>
             <p class="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-accent mb-3">Newsletter</p>
             {subscribe.title && (
                 <h2 class:list={['w-full max-w-xl text-2xl leading-tight font-display font-semibold tracking-tight sm:text-3xl', subscribe.text ? 'mb-4' : 'mb-8']}>

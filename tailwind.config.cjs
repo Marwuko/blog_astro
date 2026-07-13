@@ -6,14 +6,13 @@ module.exports = {
         fontFamily: {
             sans: ['Inter', ...defaultTheme.fontFamily.sans],
             display: ['"Space Grotesk"', ...defaultTheme.fontFamily.sans],
-            // Legacy alias — headings across the site use font-serif, keep it pointing at the display face
+            // Legacy alias: headings across the site use font-serif, keep it pointing at the display face
             serif: ['"Space Grotesk"', ...defaultTheme.fontFamily.sans],
             mono: ['"JetBrains Mono"', ...defaultTheme.fontFamily.mono]
         },
         extend: {
             colors: {
-                accent: 'rgb(var(--color-accent) / <alpha-value>)',
-                'accent-2': 'rgb(var(--color-accent-2) / <alpha-value>)'
+                accent: 'rgb(var(--color-accent) / <alpha-value>)'
             },
             textColor: {
                 main: 'rgb(var(--color-text-main) / <alpha-value>)'
@@ -26,10 +25,7 @@ module.exports = {
             borderColor: {
                 main: 'rgb(var(--color-border-main) / <alpha-value>)'
             },
-            boxShadow: {
-                glow: '0 0 40px -8px rgb(var(--color-accent) / 0.45)',
-                'glow-sm': '0 0 18px -4px rgb(var(--color-accent) / 0.5)'
-            },
+
             typography: (theme) => ({
                 dante: {
                     css: {

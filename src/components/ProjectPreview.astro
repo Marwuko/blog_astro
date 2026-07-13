@@ -8,13 +8,13 @@ const { title, description } = project.data;
 const TitleTag = headingLevel;
 ---
 
-<a class:list={['holo-card group relative block p-6 rounded-xl', className]} href={`/projects/${project.slug}/`}>
+<a class:list={['spot-card group relative block p-6 rounded-xl', className]} href={`/projects/${project.slug}/`}>
     <!-- Top row: index + arrow -->
     <div class="flex items-center justify-between mb-4">
         {typeof index === 'number' ? (
             <span class="text-[10px] font-mono tracking-[0.16em] text-accent/70">{String(index + 1).padStart(2, '0')}</span>
         ) : (
-            <span class="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-accent to-accent-2"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-accent/60"></span>
         )}
         <div class="shrink-0 w-7 h-7 rounded-full border border-main/15 flex items-center justify-center opacity-40 group-hover:opacity-100 group-hover:border-accent/50 group-hover:-rotate-45 transition-all duration-300">
             <ArrowRight class="fill-current w-3 h-3 text-accent" />
