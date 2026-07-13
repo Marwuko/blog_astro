@@ -8,6 +8,11 @@ const hero = siteConfig.hero;
 const typedWords = ['AI assistants.', 'data pipelines.', 'BI dashboards.', 'legal databases.', 'useful automation.'];
 
 const credentials = ['B.S. Information Technology', 'AWS AI Scientist Program', 'Woosong University TA'];
+
+const liveProducts = [
+    { name: 'flexaipos.com', href: 'https://www.flexaipos.com', label: 'FlexAI POS' },
+    { name: 'technabi.com', href: 'https://technabi.com', label: 'Technabi' }
+];
 ---
 
 {(hero?.title || hero?.text || (hero?.actions && hero.actions.length > 0)) && (
@@ -50,6 +55,27 @@ const credentials = ['B.S. Information Technology', 'AWS AI Scientist Program', 
                         ))}
                     </div>
                 )}
+
+                <!-- Shipped and running in production -->
+                <div class="pt-2" data-reveal style="--reveal-delay: 220ms">
+                    <p class="text-[10px] font-mono uppercase tracking-[0.18em] text-main/40 mb-2.5">Now live in production</p>
+                    <div class="flex flex-wrap gap-2.5">
+                        {liveProducts.map((product) => (
+                            <a
+                                href={product.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="group inline-flex items-center gap-2.5 glass-panel rounded-lg px-4 py-2.5 transition-all duration-200 hover:border-accent/60 hover:-translate-y-px"
+                            >
+                                <span class="pulse-dot w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>
+                                <span class="text-sm font-semibold">{product.label}</span>
+                                <span class="font-mono text-[11px] text-main/45 group-hover:text-accent transition-colors duration-200">
+                                    {product.name} &#8599;
+                                </span>
+                            </a>
+                        ))}
+                    </div>
+                </div>
 
                 <div class="flex flex-wrap gap-2 pt-2" data-reveal style="--reveal-delay: 260ms">
                     {credentials.map((item) => (
